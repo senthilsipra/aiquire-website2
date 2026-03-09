@@ -1,0 +1,57 @@
+---
+title: "RAG vs Fine-Tuning: A Practical Decision Framework"
+description: "When should you fine-tune an LLM versus build a RAG pipeline? A practitioner's guide to making the right call."
+date: "2026-01-28"
+category: "Generative AI"
+author: "Aiquire Team"
+readTime: "8 min read"
+featured: false
+---
+
+Every week we get asked the same question: "Should we fine-tune the model or build a RAG system?"
+
+The short answer: it depends on whether your use case is about knowledge or behavior.
+
+## The Core Distinction
+
+**Fine-tuning** changes how a model behaves — its tone, format, reasoning style, domain vocabulary. It bakes patterns into the model's weights.
+
+**RAG (Retrieval-Augmented Generation)** changes what a model knows at inference time — feeding it relevant context from your knowledge base before it generates a response.
+
+These solve different problems. Conflating them leads to expensive mistakes.
+
+## When to Fine-Tune
+
+Fine-tuning makes sense when:
+- You need highly consistent output format (e.g., structured JSON extraction)
+- You're teaching domain-specific reasoning patterns
+- The behavior change is stable (doesn't need frequent updates)
+- You have 500+ high-quality labeled examples
+
+Fine-tuning is NOT the right tool when you need the model to answer questions about your latest internal documents. It doesn't memorize facts well — it learns patterns.
+
+## When to Build RAG
+
+RAG makes sense when:
+- Your knowledge base changes frequently
+- You need to cite sources and show your work
+- You're dealing with proprietary information that shouldn't leave your environment
+- You want to avoid hallucination on specific factual questions
+
+RAG's weakness: it requires good retrieval. Garbage in, garbage out. If your chunking strategy is poor or your embeddings don't capture semantic similarity well, the model never gets the right context.
+
+## The Hybrid Approach
+
+Many production systems use both: a fine-tuned model (for domain behavior) on top of a RAG pipeline (for knowledge retrieval). This combination delivers both consistency and accuracy.
+
+The key is sequencing: get your RAG pipeline working first. Validate that retrieval quality is high. Then consider fine-tuning if you still have behavior gaps.
+
+## Our Decision Framework
+
+1. Is this about **behavior** (format, tone, reasoning)? → Fine-tune
+2. Is this about **knowledge** (specific facts, documents, recent data)? → RAG
+3. Is the knowledge **dynamic** (changes weekly/monthly)? → RAG only, skip fine-tune until knowledge is stable
+4. Do you have **fewer than 200 examples**? → Don't fine-tune yet; use few-shot prompting instead
+5. Do you need to **cite sources**? → RAG required
+
+When in doubt, start with RAG. It's faster to iterate, easier to debug, and more explainable to stakeholders.
