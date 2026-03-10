@@ -37,10 +37,8 @@ const FOOTER_SERVICES: ServiceLink[] = [
   { slug: "ai-ml-development", title: "AI/ML Development" },
   { slug: "generative-ai-llm", title: "Generative AI & LLM Solutions" },
   { slug: "ai-powered-software", title: "AI-Powered Software Development" },
-  { slug: "data-engineering-analytics", title: "Data Engineering & Analytics" },
   { slug: "mlops-infrastructure", title: "MLOps & AI Infrastructure" },
-  { slug: "speed-to-lead-agents", title: "Speed-to-Lead AI Agents" },
-  { slug: "ai-academy", title: "AI Academy" },
+  { slug: "ai-academy", title: "AI Training" },
   { slug: "packaged-solutions", title: "Packaged AI Solutions" },
 ];
 
@@ -197,14 +195,16 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className={cn(
-                "inline-block text-2xl font-bold tracking-tight text-white",
-                "transition-opacity duration-150 hover:opacity-80"
-              )}
-              style={{ fontFamily: "var(--font-heading)" }}
+              className="inline-block transition-opacity duration-150 hover:opacity-80"
               aria-label="Aiquire home"
             >
-              Aiquire
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo.svg"
+                alt="Aiquire"
+                height={44}
+                style={{ height: 44, width: "auto", display: "block" }}
+              />
             </Link>
 
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">

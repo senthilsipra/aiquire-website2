@@ -51,12 +51,11 @@ function Breadcrumb() {
 
 interface PackageCardProps {
   name: string;
-  price: string;
   description: string;
   index: number;
 }
 
-function PackageCard({ name, price, description, index }: PackageCardProps) {
+function PackageCard({ name, description, index }: PackageCardProps) {
   return (
     <RevealOnScroll delay={index * 80}>
       <article
@@ -68,20 +67,6 @@ function PackageCard({ name, price, description, index }: PackageCardProps) {
           "hover:shadow-md hover:border-accent/30 hover:-translate-y-0.5"
         )}
       >
-        {/* Price */}
-        <p
-          className={cn(
-            "font-heading font-bold text-accent",
-            "text-display-sm",
-            "leading-tight tracking-tight mb-1"
-          )}
-        >
-          {price}
-        </p>
-        <p className="mb-5 font-mono text-[10px] font-medium uppercase tracking-widest text-textSecondary">
-          per month
-        </p>
-
         {/* Name */}
         <h3 className="font-heading font-bold text-lg text-textPrimary mb-3 leading-snug">
           {name}
@@ -135,42 +120,36 @@ const PACKAGES: PackageCardProps[] = [
   {
     index: 0,
     name: "Content & Podcast Repurposing Engine",
-    price: "$297",
     description:
       "Upload a raw podcast episode or long-form content. Within 24 hours, receive: show notes, 5 social media posts (platform-optimized), short-form clip suggestions with timestamps, email newsletter draft, and a blog post. All in your brand voice.",
   },
   {
     index: 1,
     name: "Real Estate Listing Automation",
-    price: "$197",
     description:
       "Add a new property. Automatically generate: MLS-optimized description, 4 social media posts with hashtags, email to your buyer list, virtual tour script, and a property flyer draft. Consistent quality across every listing.",
   },
   {
     index: 2,
     name: "Client Onboarding Automation",
-    price: "$397",
     description:
       "New client signs? Trigger automatic welcome sequences, document collection workflows, internal team notifications, CRM updates, and kickoff scheduling. Every client gets a premium experience without manual coordination.",
   },
   {
     index: 3,
     name: "Proposal & Document Generation",
-    price: "$347",
     description:
       "Feed in project details. Get a professionally formatted proposal, scope of work, timeline, and pricing document — customized to your templates and brand. What used to take 3 hours takes 3 minutes.",
   },
   {
     index: 4,
     name: "Review & Reputation Management",
-    price: "$197",
     description:
       "Automated review requests sent at the optimal time after service delivery. AI-drafted responses to reviews (positive and negative). Weekly reputation report. Works with Google, Yelp, and industry-specific platforms.",
   },
   {
     index: 5,
     name: "Reporting & Analytics Automation",
-    price: "$247",
     description:
       "Connect your data sources. Receive automated weekly/monthly reports with insights, trend analysis, and recommendations. No more half-day report building. Your team focuses on acting on the data, not compiling it.",
   },

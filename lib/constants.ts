@@ -5,7 +5,7 @@ export const CONTACT_EMAIL = "hello@aiquire.ai";
 
 export const NAV_LINKS = [
   { label: "Services", href: "/services", hasMega: true },
-  { label: "Claude Training", href: "/claude-training" },
+  { label: "AI Training", href: "/services/ai-academy", hasTrainingMega: true },
   { label: "Our Approach", href: "/approach" },
   { label: "Industries", href: "/industries" },
   { label: "Case Studies", href: "/case-studies" },
@@ -74,20 +74,6 @@ export const SERVICES = [
     ],
   },
   {
-    slug: "data-engineering-analytics",
-    title: "Data Engineering & Analytics",
-    shortTitle: "Data",
-    icon: "Database",
-    description: "AI is only as good as its data. We build the pipelines, warehouses, and BI layers that make AI possible.",
-    fullDescription: "AI without data infrastructure is a science experiment. We build the pipelines, warehouses, and analytics platforms that turn raw data into a strategic asset.",
-    subServices: [
-      { title: "Data Architecture", desc: "Design scalable, secure data infrastructure that grows with your business." },
-      { title: "Cloud Data Platforms", desc: "Snowflake, BigQuery, Databricks — built and optimized for your workloads." },
-      { title: "ETL/ELT Pipelines", desc: "Reliable data pipelines that move, transform, and validate at scale." },
-      { title: "BI Dashboards", desc: "Self-service analytics that give every team access to insights." },
-    ],
-  },
-  {
     slug: "mlops-infrastructure",
     title: "MLOps & AI Infrastructure",
     shortTitle: "MLOps",
@@ -102,26 +88,9 @@ export const SERVICES = [
     ],
   },
   {
-    slug: "speed-to-lead-agents",
-    title: "Speed-to-Lead AI Agents",
-    shortTitle: "Speed-to-Lead",
-    icon: "Zap",
-    description: "Leads go cold in minutes. Your AI agent responds in seconds — qualifying leads, capturing information, and booking meetings automatically, 24/7.",
-    fullDescription: "Responding to a lead within 5 minutes makes you 100x more likely to qualify them than waiting 30 minutes. Our speed-to-lead agents respond to every inquiry in under 60 seconds, 24/7.",
-    customPage: true,
-    subServices: [
-      { title: "Instant Lead Response Agents", desc: "AI responds to every inquiry within 60 seconds, any time of day." },
-      { title: "Intelligent Lead Qualification", desc: "Conversational qualification that asks the right questions and scores leads automatically." },
-      { title: "Automated Appointment Booking", desc: "Qualified leads booked directly on your calendar without human intervention." },
-      { title: "After-Hours Coverage", desc: "Never miss a lead submitted at 11pm or over the weekend." },
-      { title: "Multi-Channel Response", desc: "SMS, email, and chat — responding on the channel the lead used." },
-      { title: "CRM Integration & Lead Routing", desc: "CRM updated automatically, leads routed to the right team member." },
-    ],
-  },
-  {
     slug: "ai-academy",
-    title: "AI Academy",
-    shortTitle: "AI Academy",
+    title: "AI Training",
+    shortTitle: "AI Training",
     icon: "GraduationCap",
     description: "Technology without capability is a liability. The AI Academy ensures your people don't just have AI tools — they know how to use them, champion them, and govern them.",
     fullDescription: "From executive AI literacy workshops to multi-week adoption programmes, training that sticks — delivered by practitioners who've done the work.",
