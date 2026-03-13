@@ -5,13 +5,33 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/seo/JsonLd";
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Claude Training Practice | Aiquire",
+  title: "Claude Training Practice | Master Anthropic Claude",
   description:
-    "The fastest, most structured way to turn your teams into Claude power users — from knowledge workers mastering Claude Cowork to engineers deploying Claude Code at production scale.",
+    "Turn your teams into Claude power users. Dedicated training for business teams on Claude for Work and engineering teams on Claude Code at production scale.",
+  keywords: [
+    "Claude training",
+    "Anthropic Claude",
+    "Claude Code training",
+    "prompt engineering Claude",
+    "AI training for developers",
+    "enterprise AI adoption",
+  ],
+  openGraph: {
+    title: "Claude Training Practice | Master Anthropic Claude",
+    description:
+      "Turn your teams into Claude power users. Dedicated training for business teams on Claude for Work and engineering teams on Claude Code.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Master Anthropic Claude | Claude Training Practice",
+    description: "Enterprise-grade training for Claude for Work and Claude Code.",
+  },
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -142,6 +162,24 @@ function TableRow({ programme, duration, audience, shade }: TableRowProps) {
 export default function ClaudeTrainingPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Claude Training", item: "/claude-training" },
+        ]}
+      />
+      <CourseJsonLd
+        course={{
+          name: "Claude for Business Teams",
+          description: "Turning teams into Claude power users through Cowork and agentic productivity workflows.",
+        }}
+      />
+      <CourseJsonLd
+        course={{
+          name: "Claude Code for Engineering Teams",
+          description: "Deploying Claude Code as a full agentic development environment with secure MLOps practices.",
+        }}
+      />
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
       <section className="relative w-full overflow-hidden bg-primary">
         <span aria-hidden="true" className="pointer-events-none absolute -top-32 -right-32 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />

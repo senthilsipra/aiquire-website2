@@ -7,36 +7,29 @@ import { CASE_STUDIES } from "@/lib/case-studies";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { CaseStudyFilters } from "./CaseStudyFilters";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "Production AI Case Studies | Measurable Business Results",
   description:
-    "Real AI projects that went to production and delivered measurable business value. See how Aiquire reduced fraud detection time, cut unplanned downtime, improved demand forecasting, and automated clinical documentation.",
+    "Explore how Aiquire delivers high-ROI AI solutions across industries. Real results in fraud detection, predictive maintenance, demand forecasting, and clinical NLP automation.",
   keywords: [
     "AI case studies",
     "machine learning results",
     "AI ROI examples",
-    "AI consulting results",
-    "production AI projects",
-    "AI business value",
+    "AI automation business impact",
+    "production AI engineering",
   ],
   alternates: {
     canonical: `${SITE_URL}/case-studies`,
   },
   openGraph: {
-    title: `Case Studies | ${SITE_NAME}`,
+    title: "Production AI Case Studies | Measurable Business Results",
     description:
-      "Every project below went to production and delivered measurable business value. See the work.",
+      "Every project delivered measurable business value. Real systems, real results.",
     url: `${SITE_URL}/case-studies`,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Case Studies | ${SITE_NAME}`,
-    description:
-      "Real AI results. Fraud detection. Predictive maintenance. Demand forecasting. Clinical NLP.",
   },
 };
 
@@ -126,6 +119,12 @@ function Hero() {
 export default function CaseStudiesPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Case Studies", item: "/case-studies" },
+        ]}
+      />
       <Hero />
 
       {/* Filter + Grid — client component handles filtering */}

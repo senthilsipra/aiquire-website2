@@ -4,13 +4,25 @@ import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  Briefcase,
+  Brain,
+  Cpu,
+  Laptop,
+  Cloud,
+  GraduationCap,
+  Package,
+  Lightbulb,
+  BrainCircuit,
+  Sparkles,
+  Code2,
+  Settings2
+} from "lucide-react";
 import type { LucideProps } from "lucide-react";
 
 export interface ServiceCardProps {
   /**
-   * Name of the Lucide icon to display, e.g. "BrainCircuit", "BarChart3".
-   * The icon is loaded dynamically so only the icon actually used is bundled
-   * per card at runtime.
+   * Name of the Lucide icon to display, e.g. "Brain", "Briefcase".
    */
   icon: string;
   title: string;
@@ -20,38 +32,20 @@ export interface ServiceCardProps {
   className?: string;
 }
 
-/**
- * Lazily resolves a Lucide icon by name.
- * Returns null while loading and on error so the card degrades gracefully.
- */
-function useLucideIcon(name: string) {
-  const [IconComponent, setIconComponent] =
-    React.useState<React.ComponentType<LucideProps> | null>(null);
-
-  React.useEffect(() => {
-    let cancelled = false;
-
-    import("lucide-react")
-      .then((mod) => {
-        if (cancelled) return;
-        const found = (mod as Record<string, unknown>)[name];
-        if (typeof found === "function") {
-          setIconComponent(
-            () => found as React.ComponentType<LucideProps>
-          );
-        }
-      })
-      .catch(() => {
-        // Silently ignore — card renders without icon
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [name]);
-
-  return IconComponent;
-}
+const iconMap: Record<string, React.ComponentType<LucideProps>> = {
+  Briefcase,
+  Brain,
+  Cpu,
+  Laptop,
+  Cloud,
+  GraduationCap,
+  Package,
+  Lightbulb,
+  BrainCircuit,
+  Sparkles,
+  Code2,
+  Settings2
+};
 
 /**
  * ServiceCard
@@ -68,14 +62,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   href,
   className,
 }) => {
-  const Icon = useLucideIcon(icon);
+  const Icon = iconMap[icon];
 
   return (
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       className={cn(
-        "group relative flex flex-col",
+        "group relative flex flex-col items-center text-center",
         "rounded-2xl border border-border bg-white",
         "p-6 md:p-8",
         "shadow-sm transition-shadow duration-300",

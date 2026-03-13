@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "what-is-generative-ai",
+    "title": "What is Generative AI",
+    "published": true,
+    "cover_image": "https://images.openai.com/static-rsc-3/lc7nIlJQTkR5ofaAGM_sHIFlND506e9Jx5nPhU8gkhHmCSOV2zoPRhClsj6qEl46nirKu3WndB8_C1_kHma5rrgc8qiMF45Spk6l4LV23XA?purpose=inline",
+    "featured": false
+  },
+  {
+    "slug": "ai-vs-machine-learning-vs-deep-learning",
+    "title": "AI vs Machine Learning vs Deep Learning",
+    "published": true,
+    "cover_image": "https://images.openai.com/static-rsc-3/af1dii8ZoubcEoS5KyOEfEhDTmAQbgjpR7sD_IsDGtZ0x4t17NoUZwLb_qrnGa67zmL8bwHtX56ek6gOolF2d8u5xoPuEaH5j2B7HyF0ob4?purpose=inline",
+    "featured": false
+  },
+  {
+    "slug": "how-ai-is-transforming-businesses",
+    "title": "How AI is Transforming Businesses",
+    "published": true,
+    "cover_image": "https://images.openai.com/static-rsc-3/qiOVy0YyyBsF0MwVd7uAmirdtauqY2NabNaQmVJtAXQsS5nQgntGg6d_jlLa6XWwUdaJxVJ7zGQdx8k9fIUK-0MFcMRLnwokCH9xAR6cccE?purpose=inline",
+    "featured": false
+  },
+  {
+    "slug": "what-is-mlops",
+    "title": "What is MLOps",
+    "published": true,
+    "cover_image": "https://images.openai.com/static-rsc-3/s11FCWjqbZXjhmiovtzjpzR74FExLRxX-lH42U4G7bmXrAYgGp432iOuDJX4XtERRxC8lgboiEMH8xnwgyzxRv0lEOcDH2FjK3aZJoMZSFo?purpose=inline",
+    "featured": false
+  },
+  {
+    "slug": "ai-development-process-explained",
+    "title": "AI Development Process Explained",
+    "published": true,
+    "cover_image": "https://images.openai.com/static-rsc-3/4EnV7VNZKcLyztDi6E84s6UJ0u4rlQ62y9fcSGUMz3f-icgKhlb9Dchg8f8Uqm-yEdJiVS0JHwaF8NR_abrbDTI1V_bFPSAzSL8jEdwnal8?purpose=inline",
+    "featured": true
+  }
+]

@@ -37,6 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { OrganizationJsonLd, ProfessionalServiceJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
+
 export default function RootLayout({
   children,
 }: {
@@ -52,9 +54,13 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen flex flex-col">
-        <Navigation />
+        {/* These are hidden on admin pages via CSS injected by admin layout */}
+        <OrganizationJsonLd />
+        <ProfessionalServiceJsonLd />
+        <WebSiteJsonLd />
+        <div id="public-nav"><Navigation /></div>
         <main className="flex-1">{children}</main>
-        <Footer />
+        <div id="public-footer"><Footer /></div>
       </body>
     </html>
   );

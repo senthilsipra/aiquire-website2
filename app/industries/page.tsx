@@ -9,26 +9,26 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { INDUSTRIES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import IndustryTabs from "./IndustryTabs";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Industry Expertise",
+  title: "Industry Expertise | AI Solutions by Sector",
   description:
-    "Aiquire brings deep domain knowledge to AI consulting across Healthcare, Financial Services, Retail, Manufacturing, Logistics, and Real Estate. Find your industry and see how we solve your specific challenges.",
+    "Aiquire delivers deep domain expertise in AI consulting for Healthcare, Finance, Retail, Manufacturing, Logistics, and Real Estate. Domain-specific AI that drives ROI.",
   keywords: [
-    "AI consulting by industry",
     "healthcare AI consulting",
     "financial services AI",
-    "retail AI solutions",
-    "manufacturing AI",
-    "logistics AI",
-    "real estate AI",
+    "retail AI strategy",
+    "manufacturing machine learning",
+    "logistics automation AI",
+    "real estate AI solutions",
   ],
   openGraph: {
-    title: "Industry Expertise | Aiquire",
+    title: "Industry Expertise | AI Solutions by Sector",
     description:
-      "AI that speaks your industry's language. Deep domain expertise across six verticals.",
+      "AI that speaks your industry's language. Deep domain expertise across six core verticals.",
     url: "https://aiquire.ai/industries",
   },
 };
@@ -117,9 +117,9 @@ function IndustrySection({ industry, index }: IndustrySectionProps) {
 
         {/* Right: use-case grid */}
         <RevealOnScroll delay={100} className="flex-1">
-          <p className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          <h3 className="mb-5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             Key Use Cases
-          </p>
+          </h3>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {industry.useCases.map((useCase, i) => (
               <li
@@ -202,6 +202,12 @@ function Hero() {
 export default function IndustriesPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Industries", item: "/industries" },
+        ]}
+      />
       <Hero />
 
       {/* Sticky industry navigation tabs (client component) */}

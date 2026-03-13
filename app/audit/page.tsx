@@ -9,9 +9,27 @@ import { cn } from "@/lib/utils";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Free AI Workflow Audit | Aiquire",
+  title: "Free AI Workflow Audit | Automation ROI Analysis",
   description:
-    "In a free 20-minute workflow audit, we'll analyse how you operate today and show you the specific automations that would have the biggest impact — with estimated ROI for each.",
+    "Get a free AI workflow audit. We analyze your operations and identify high-impact automation opportunities with estimated ROI for each.",
+  keywords: [
+    "AI audit",
+    "workflow automation analysis",
+    "AI ROI calculator",
+    "business process optimization",
+    "AI consulting free audit",
+  ],
+  openGraph: {
+    title: "Free AI Workflow Audit | Automation ROI Analysis",
+    description:
+      "Identify high-impact automation opportunities in your workflows with estimated ROI.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Workflow Audit & ROI Analysis",
+    description: "Get a free audit of your business processes for AI opportunities.",
+  },
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────

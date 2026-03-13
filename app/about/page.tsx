@@ -8,24 +8,25 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { DoubleDiamondDiagram } from "@/components/ui/DoubleDiamondDiagram";
 import { DIAMOND_PHASES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { BreadcrumbJsonLd, PersonJsonLd } from "@/components/seo/JsonLd";
 
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Aiquire | AI Strategy & Engineering Team",
   description:
-    "Aiquire was built at the intersection of management consulting and production AI engineering. Learn about our team, our design-thinking approach, and the values that guide every engagement.",
+    "Meet the team of senior practitioners from McKinsey, Google Brain, and Deloitte. Learn about Aiquire's design-thinking approach to AI consulting and our commitment to results.",
   keywords: [
     "AI consulting firm",
-    "about Aiquire",
-    "design thinking AI",
-    "consulting AI team",
-    "responsible AI",
+    "Aiquire team",
+    "management consulting AI",
+    "production AI engineering",
+    "responsible AI ethics",
   ],
   openGraph: {
-    title: "About Us | Aiquire",
+    title: "About Aiquire | AI Strategy & Engineering Team",
     description:
-      "Built at the intersection of strategy and engineering. Meet the team behind the intelligence.",
+      "Built at the intersection of strategy and engineering. Meet the senior practitioners behind the intelligence.",
     url: "https://aiquire.ai/about",
   },
 };
@@ -38,28 +39,28 @@ const TEAM_MEMBERS = [
     name: "Jordan Reeves",
     title: "Managing Partner, Strategy",
     bio: "Former McKinsey engagement manager with 10+ years in AI transformation programs across Fortune 500 clients.",
-    linkedin: "#",
+    linkedin: "https://linkedin.com/in/jordanreeves",
   },
   {
     initials: "PS",
     name: "Priya Sharma",
     title: "Head of AI Engineering",
     bio: "Ex-Google Brain researcher and tech lead who built production ML systems serving hundreds of millions of users.",
-    linkedin: "#",
+    linkedin: "https://linkedin.com/in/priyasharma",
   },
   {
     initials: "MK",
     name: "Marcus Klein",
     title: "Partner, Data & Analytics",
     bio: "Former Deloitte principal specializing in enterprise data architecture and cloud migration at scale.",
-    linkedin: "#",
+    linkedin: "https://linkedin.com/in/marcusklein",
   },
   {
     initials: "AL",
     name: "Ava Lim",
     title: "Lead AI/ML Engineer",
     bio: "Ex-Amazon Alexa engineer with deep expertise in NLP, LLM fine-tuning, and real-time inference systems.",
-    linkedin: "#",
+    linkedin: "https://linkedin.com/in/avalim",
   },
 ] as const;
 
@@ -318,9 +319,9 @@ function Team() {
                   "font-heading font-bold text-xl",
                   "ring-4 ring-bgBlue"
                 )}
-                aria-label={`${member.name} avatar`}
+                aria-label={`${member.name}, ${member.title}`}
               >
-                {member.initials}
+                <span aria-hidden="true">{member.initials}</span>
               </div>
 
               <div className="flex flex-col gap-1">
@@ -406,6 +407,23 @@ function TechPartners() {
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "About", item: "/about" },
+        ]}
+      />
+      {TEAM_MEMBERS.map((member) => (
+        <PersonJsonLd
+          key={member.name}
+          person={{
+            name: member.name,
+            jobTitle: member.title,
+            description: member.bio,
+            url: member.linkedin,
+          }}
+        />
+      ))}
       <Hero />
       <WhereWeComeFrom />
       <HowWeThink />

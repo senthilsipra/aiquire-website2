@@ -27,9 +27,20 @@ import DoubleDiamondDiagram from "@/components/ui/DoubleDiamondDiagram";
 // ─── SEO Metadata ────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} — We Build AI That Actually Works for Your Business`,
+  title: `${SITE_NAME} — AI Consulting & Engineering For Modern Business`,
   description:
-    "Aiquire combines management consulting rigor with production-grade AI engineering. Our team — from McKinsey, BCG, Deloitte, and Accenture — helps companies build AI systems that deliver measurable business impact.",
+    "Aiquire is a premier AI consulting firm specializing in AI strategy, custom AI engineering, Generative AI, and LLM solutions. We combine management consulting rigor with production-grade engineering to deliver measurable impact.",
+  keywords: [
+    "AI Consulting",
+    "AI Engineering",
+    "Generative AI",
+    "AI Development Services",
+    "AI Strategy",
+    "Machine Learning Solutions",
+    "LLM Implementation",
+    "Enterprise AI Roadmap",
+    "MLOps Services",
+  ],
   alternates: {
     canonical: SITE_URL,
   },
@@ -38,14 +49,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: `${SITE_NAME} — We Build AI That Actually Works for Your Business`,
     description:
-      "End-to-end AI consulting and engineering. Strategy, custom ML models, GenAI, data pipelines, and MLOps — all the way to production.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${SITE_NAME} homepage` }],
+      "Strategic AI consulting and end-to-end engineering. From roadmap to production-ready ML and Generative AI solutions.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${SITE_NAME} — AI Consulting and Engineering` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} — AI That Actually Works`,
     description:
-      "Management consulting rigor + production-grade AI engineering. From strategy to deployment.",
+      "Premium AI consulting and engineering. We translate complex AI into business value.",
   },
 };
 
@@ -80,7 +91,7 @@ const DIFFERENTIATORS = [
     number: "05",
     title: "Consulting DNA",
     description:
-      "Our team comes from the world's top consulting firms — McKinsey, BCG, Deloitte, Accenture, and more. That means we don't just build technology. We understand business models, organizational change, stakeholder management, and how to tie every AI initiative to a P&L outcome. You get a partner who speaks both boardroom and codebase.",
+      "Our team brings experience from top-tier consulting firms, combining deep business insight with advanced technology expertise.",
   },
 ] as const;
 
@@ -130,7 +141,7 @@ export default function HomePage() {
       <SectionWrapper bg="white" id="problem">
         <RevealOnScroll>
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-accent">
+            <p className="mb-4 font-mono text-sm font-bold uppercase tracking-[0.2em] text-accent">
               The Intelligence Gap
             </p>
             <h2
@@ -246,15 +257,13 @@ export default function HomePage() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DIFFERENTIATORS.map((item, i) => (
-            <RevealOnScroll key={item.number} delay={i * 80}>
+            <RevealOnScroll className="h-full" key={item.number} delay={i * 80}>
               <article
                 className={cn(
                   "group relative flex flex-col",
-                  "rounded-2xl border border-border bg-white",
+                  "h-full rounded-2xl border border-border bg-white",
                   "p-6 md:p-8",
-                  "shadow-sm transition-shadow duration-300 hover:shadow-md",
-                  // Make the 5th card (last, consulting DNA) span full width on lg
-                  i === 4 ? "lg:col-span-1" : ""
+                  "shadow-sm transition-shadow duration-300 hover:shadow-md"
                 )}
               >
                 {/* Numbered badge */}
@@ -380,9 +389,9 @@ export default function HomePage() {
                     <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-textSecondary">
                       {phase.type}
                     </p>
-                    <p className="font-heading font-bold text-base text-primary leading-tight">
+                    <h3 className="font-heading font-bold text-base text-primary leading-tight">
                       {phase.phase.charAt(0) + phase.phase.slice(1).toLowerCase()}
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -463,12 +472,13 @@ export default function HomePage() {
         {/* Testimonials */}
         <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
           {TESTIMONIALS.map((t, i) => (
-            <RevealOnScroll key={t.author} delay={i * 150}>
+            <RevealOnScroll className="h-full" key={t.author} delay={i * 150}>
               {/*
                 TestimonialCard has light bg by design; on the dark section
                 background it creates a nice floating card effect.
               */}
               <TestimonialCard
+                className="h-full"
                 quote={t.quote}
                 author={t.author}
                 title={t.title}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getCmsPostBySlug, getAllCmsPosts, getCmsPostMetadata } from "@/lib/blog-cms";
 import { formatDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { SITE_NAME } from "@/lib/constants";
@@ -10,7 +10,7 @@ import { SITE_NAME } from "@/lib/constants";
 // ─── Static params ────────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await getAllCmsPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
@@ -19,19 +19,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getCmsPostMetadata(slug);
   if (!post) return {};
   return {
-    title: post.title,
-    description: post.description,
+    title: post.meta_title || post.title,
+    description: post.meta_description || post.excerpt,
     openGraph: {
-      title: `${post.title} | ${SITE_NAME}`,
-      description: post.description,
+      title: `${post.meta_title || post.title} | ${SITE_NAME}`,
+      description: post.meta_description || post.excerpt || '',
       type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
     },
   };
 }
@@ -52,15 +51,18 @@ const mdxComponents = {};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function BlogPostPage({
+import { BlogPostingJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+
+export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getCmsPostBySlug(slug);
   if (!post) notFound();
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllCmsPosts();
   const related = allPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
@@ -70,6 +72,14 @@ export default function BlogPostPage({
 
   return (
     <>
+      <BlogPostingJsonLd post={post} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Blog", item: "/blog" },
+          { name: post.title, item: `/blog/${post.slug}` },
+        ]}
+      />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="bg-bgLight border-b border-border">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-16">
@@ -148,7 +158,23 @@ export default function BlogPostPage({
               "[&_hr]:border-border [&_hr]:my-10"
             )}
           >
-            <MDXRemote source={post.content} components={mdxComponents} />
+            {post.coverImage && (
+              <div className="mb-10 w-full overflow-hidden rounded-2xl bg-gray-100">
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="w-full object-cover max-h-[500px]"
+                />
+              </div>
+            )}
+            {post.content.trimStart().startsWith("<") ? (
+              <div
+                className="blog-html-content"
+                dangerouslySetInnerHTML={{ __html: post.content }}
+              />
+            ) : (
+              <MDXRemote source={post.content} components={mdxComponents} />
+            )}
           </article>
 
           {/* Sidebar */}

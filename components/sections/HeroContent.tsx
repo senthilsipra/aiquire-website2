@@ -118,48 +118,9 @@ const FloatingDots: React.FC = () => (
   </div>
 );
 
-// ─── Trust bar companies ──────────────────────────────────────────────────────
 
-const TRUST_COMPANIES = [
-  "McKinsey",
-  "BCG",
-  "Deloitte",
-  "Accenture",
-  "Google",
-  "Meta",
-  "Amazon",
-];
 
-const TrustBar: React.FC = () => (
-  <motion.div
-    initial={{ opacity: 0, y: 16 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.7, ease: "easeOut", delay: 0.7 }}
-    className="mt-16 pt-10 border-t border-white/10"
-  >
-    <p className="text-white/40 text-xs font-mono uppercase tracking-[0.2em] mb-5 text-center">
-      Teams from:
-    </p>
-    <div className="flex flex-wrap items-center justify-center gap-3">
-      {TRUST_COMPANIES.map((company) => (
-        <span
-          key={company}
-          className={cn(
-            "inline-flex items-center justify-center",
-            "rounded-full px-4 py-1.5",
-            "bg-white/[0.07] border border-white/[0.12]",
-            "font-heading font-semibold text-sm text-white/60",
-            "tracking-tight",
-            "transition-colors duration-200",
-            "hover:bg-white/[0.12] hover:text-white/80 hover:border-white/20"
-          )}
-        >
-          {company}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
+
 
 // ─── Main HeroContent component ───────────────────────────────────────────────
 
@@ -304,9 +265,6 @@ const HeroContent: React.FC = () => {
             Get a Free AI Workflow Audit
           </Link>
         </motion.div>
-
-        {/* Trust bar */}
-        <TrustBar />
       </div>
 
       {/* Scroll indicator */}

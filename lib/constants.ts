@@ -18,7 +18,7 @@ export const SERVICES = [
     slug: "ai-strategy-consulting",
     title: "AI Strategy & Business Consulting",
     shortTitle: "AI Strategy",
-    icon: "Lightbulb",
+    icon: "Briefcase",
     description: "Know where AI fits. We assess your data, processes, and goals to build a roadmap that actually gets executed.",
     fullDescription: "We don't start with AI. We start with your business. Our consultants — with backgrounds at McKinsey, BCG, Deloitte, and Accenture — bring deep domain expertise across industries and functions.",
     subServices: [
@@ -36,7 +36,7 @@ export const SERVICES = [
     slug: "ai-ml-development",
     title: "AI/ML Development",
     shortTitle: "AI/ML Dev",
-    icon: "BrainCircuit",
+    icon: "Brain",
     description: "Custom models, not cookie-cutter. Predictive analytics, NLP, computer vision, and LLM solutions built for your data.",
     fullDescription: "From predictive models to computer vision to NLP systems — we build production-grade machine learning solutions trained on your data, integrated into your workflows.",
     subServices: [
@@ -50,7 +50,7 @@ export const SERVICES = [
     slug: "generative-ai-llm",
     title: "Generative AI & LLM Solutions",
     shortTitle: "Gen AI",
-    icon: "Sparkles",
+    icon: "Cpu",
     description: "Go beyond chatbots. Custom fine-tuned models, RAG pipelines, and AI agents that automate real workflows.",
     fullDescription: "The generative AI landscape moves fast. We help you cut through the hype and build applications that leverage LLMs responsibly and effectively.",
     subServices: [
@@ -64,7 +64,7 @@ export const SERVICES = [
     slug: "ai-powered-software",
     title: "AI-Powered Software Development",
     shortTitle: "AI Software",
-    icon: "Code2",
+    icon: "Laptop",
     description: "Full-stack applications with intelligence built in. Smart dashboards, automation tools, and AI-native SaaS products.",
     fullDescription: "We don't just build models — we build the software around them. Full-stack product engineering with AI capabilities woven into the core.",
     subServices: [
@@ -77,7 +77,7 @@ export const SERVICES = [
     slug: "mlops-infrastructure",
     title: "MLOps & AI Infrastructure",
     shortTitle: "MLOps",
-    icon: "Settings2",
+    icon: "Cloud",
     description: "Ship models, not just notebooks. CI/CD for ML, monitoring, drift detection, and scalable cloud infrastructure.",
     fullDescription: "Getting a model to work in a notebook is step one. Getting it to work reliably in production at scale is where we come in.",
     subServices: [

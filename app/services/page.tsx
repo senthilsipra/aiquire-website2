@@ -11,11 +11,14 @@ import { DoubleDiamondDiagram } from "@/components/ui/DoubleDiamondDiagram";
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Our Services",
+  title: "AI Services & Solutions | Aiquire",
   description:
     "End-to-end AI services — from strategy and roadmapping to custom model development, generative AI, data engineering, and MLOps. We take you from AI idea to AI impact.",
+  alternates: {
+    canonical: "https://aiquire.ai/services",
+  },
   openGraph: {
-    title: "Our Services | Aiquire",
+    title: "Our AI Services | Aiquire",
     description:
       "End-to-end AI services covering strategy, ML development, generative AI, software engineering, data infrastructure, and MLOps.",
   },
@@ -379,9 +382,9 @@ export default function ServicesPage() {
                     <ServiceIcon name={service.icon} />
                   </div>
                   <div>
-                    <h2 className="font-heading font-bold text-xl text-textPrimary leading-snug">
+                    <h3 className="font-heading font-bold text-xl text-textPrimary leading-snug">
                       {service.title}
-                    </h2>
+                    </h3>
                     <p className="mt-1.5 font-body text-sm leading-relaxed text-textSecondary">
                       {service.fullDescription}
                     </p>

@@ -14,6 +14,7 @@ export interface BlogPost {
   readTime: string;
   featured: boolean;
   content: string;
+  coverImage?: string | null;
 }
 
 export function getAllPosts(): BlogPost[] {
@@ -37,6 +38,7 @@ export function getAllPosts(): BlogPost[] {
       readTime: data.readTime ?? "5 min read",
       featured: data.featured ?? false,
       content,
+      coverImage: data.coverImage ?? null,
     } as BlogPost;
   });
 
@@ -60,6 +62,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     readTime: data.readTime ?? "5 min read",
     featured: data.featured ?? false,
     content,
+    coverImage: data.coverImage ?? null,
   };
 }
 

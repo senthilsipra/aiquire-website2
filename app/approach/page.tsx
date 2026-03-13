@@ -12,20 +12,20 @@ import { cn } from "@/lib/utils";
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Our Approach",
+  title: "Our Methodology | Design Thinking for AI",
   description:
-    "Aiquire applies design thinking — the Double Diamond framework — to every AI consulting engagement. Rigorous discovery, evidence-based decisions, and seamless engineering handoff.",
+    "Aiquire applies the Double Diamond framework to AI consulting. Rigorous discovery, evidence-based decisions, and seamless engineering handoff for production AI.",
   keywords: [
-    "design thinking AI consulting",
-    "double diamond framework AI",
-    "AI consulting process",
-    "AI project methodology",
-    "discover define develop deliver",
+    "AI consulting methodology",
+    "double diamond AI",
+    "design thinking for machine learning",
+    "AI project roadmap",
+    "discover define develop deliver AI",
   ],
   openGraph: {
-    title: "Our Approach | Aiquire",
+    title: "Our Methodology | Design Thinking for AI",
     description:
-      "How we work: design thinking for AI. A rigorous, proven process from discovery to delivery.",
+      "How we work: design thinking for AI. A rigorous, proven process from discovery to production delivery.",
     url: "https://aiquire.ai/approach",
   },
 };

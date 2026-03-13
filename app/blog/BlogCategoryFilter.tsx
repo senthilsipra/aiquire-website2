@@ -75,7 +75,17 @@ export function BlogCategoryFilter({ posts, allPosts, categories }: BlogCategory
                 key={post.slug}
                 className="group flex flex-col h-full rounded-2xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
               >
-                <div className="h-1 w-full shrink-0" style={{ backgroundColor: style.text }} aria-hidden="true" />
+                {post.coverImage ? (
+                  <div className="w-full h-48 shrink-0 overflow-hidden bg-gray-100">
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-1 w-full shrink-0" style={{ backgroundColor: style.text }} aria-hidden="true" />
+                )}
                 <div className="flex flex-col flex-1 p-6">
                   <div className="mb-4">
                     <span

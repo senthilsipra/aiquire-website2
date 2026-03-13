@@ -3,7 +3,8 @@ import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
-import { getAllPosts, BLOG_CATEGORIES, type BlogPost } from "@/lib/blog";
+import { BLOG_CATEGORIES, type BlogPost } from "@/lib/blog";
+import { getAllCmsPosts } from "@/lib/blog-cms";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { cn, formatDate } from "@/lib/utils";
 import { BlogCategoryFilter } from "./BlogCategoryFilter";
@@ -132,119 +133,130 @@ function FeaturedPost({ post }: { post: BlogPost }) {
   const style = getCategoryStyle(post.category);
 
   return (
-    <RevealOnScroll>
-      <Link
-        href={`/blog/${post.slug}`}
-        className={cn(
-          "group block w-full",
-          "rounded-2xl border border-border bg-white",
-          "shadow-sm hover:shadow-xl transition-all duration-300",
-          "overflow-hidden"
-        )}
-        aria-label={`Featured article: ${post.title}`}
-      >
-        <div className="flex flex-col lg:flex-row">
-          {/* Left color band */}
+    <Link
+      href={`/blog/${post.slug}`}
+      className={cn(
+        "group block w-full",
+        "rounded-2xl border border-border bg-white",
+        "shadow-sm hover:shadow-xl transition-all duration-300",
+        "overflow-hidden"
+      )}
+      aria-label={`Featured article: ${post.title}`}
+    >
+      <div className="flex flex-col lg:flex-row">
+        {post.coverImage ? (
+          <div className="lg:w-2/5 shrink-0 relative h-64 lg:h-auto overflow-hidden">
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:bg-gradient-to-r"
+              aria-hidden="true"
+            />
+          </div>
+        ) : (
           <div
             className="lg:w-2 shrink-0 h-1 lg:h-auto"
             style={{ backgroundColor: style.text }}
             aria-hidden="true"
           />
+        )}
 
-          <div className="flex-1 p-8 md:p-10">
-            {/* Top row: category + featured badge */}
-            <div className="flex flex-wrap items-center gap-3 mb-5">
-              <span
-                className="inline-flex items-center rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest border"
-                style={{
-                  color: style.text,
-                  borderColor: style.border,
-                  backgroundColor: style.bg,
-                }}
-              >
-                {post.category}
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 bg-primary text-white font-mono text-[11px] font-semibold uppercase tracking-widest">
-                <span
-                  className="h-1.5 w-1.5 rounded-full bg-accent-light animate-pulse"
-                  aria-hidden="true"
-                />
-                Featured
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2
-              className={cn(
-                "mb-4 font-heading font-bold text-primary",
-                "text-2xl md:text-3xl lg:text-display-sm",
-                "leading-snug tracking-tight",
-                "group-hover:text-accent transition-colors duration-200"
-              )}
-            >
-              {post.title}
-            </h2>
-
-            {/* Description */}
-            <p className="mb-6 font-body text-base leading-relaxed text-textSecondary max-w-2xl">
-              {post.description}
-            </p>
-
-            {/* Meta row */}
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              {/* Author avatar placeholder + name */}
-              <div className="flex items-center gap-2.5">
-                <span
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-bgBlue font-heading text-xs font-bold text-accent"
-                  aria-hidden="true"
-                >
-                  {post.author
-                    .split(" ")
-                    .map((w) => w[0])
-                    .slice(0, 2)
-                    .join("")}
-                </span>
-                <span className="font-body text-sm font-medium text-textPrimary">
-                  {post.author}
-                </span>
-              </div>
-
-              <span className="text-border" aria-hidden="true">·</span>
-
-              <time
-                dateTime={post.date}
-                className="font-body text-sm text-textSecondary"
-              >
-                {formatDate(post.date)}
-              </time>
-
-              <span className="text-border" aria-hidden="true">·</span>
-
-              <span className="font-body text-sm text-textSecondary">
-                {post.readTime}
-              </span>
-            </div>
-
-            {/* CTA */}
+        <div className="flex-1 p-8 md:p-10">
+          {/* Top row: category + featured badge */}
+          <div className="flex flex-wrap items-center gap-3 mb-5">
             <span
-              className={cn(
-                "inline-flex items-center gap-2",
-                "rounded-lg border border-accent bg-accent px-5 py-2.5",
-                "font-body text-sm font-semibold text-white",
-                "transition-all duration-200",
-                "group-hover:bg-accent-light group-hover:border-accent-light",
-                "focus-visible:outline-none"
-              )}
+              className="inline-flex items-center rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest border"
+              style={{
+                color: style.text,
+                borderColor: style.border,
+                backgroundColor: style.bg,
+              }}
             >
-              Read Article
-              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
-                →
-              </span>
+              {post.category}
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 bg-primary text-white font-mono text-[11px] font-semibold uppercase tracking-widest">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-accent-light animate-pulse"
+                aria-hidden="true"
+              />
+              Featured
             </span>
           </div>
+
+          {/* Title */}
+          <h2
+            className={cn(
+              "mb-4 font-heading font-bold text-primary",
+              "text-2xl md:text-3xl lg:text-display-sm",
+              "leading-snug tracking-tight",
+              "group-hover:text-accent transition-colors duration-200"
+            )}
+          >
+            {post.title}
+          </h2>
+
+          {/* Description */}
+          <p className="mb-6 font-body text-base leading-relaxed text-textSecondary max-w-2xl">
+            {post.description}
+          </p>
+
+          {/* Meta row */}
+          <div className="flex flex-wrap items-center gap-4 mb-6">
+            {/* Author avatar placeholder + name */}
+            <div className="flex items-center gap-2.5">
+              <span
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-bgBlue font-heading text-xs font-bold text-accent"
+                aria-hidden="true"
+              >
+                {post.author
+                  .split(" ")
+                  .map((w) => w[0])
+                  .slice(0, 2)
+                  .join("")}
+              </span>
+              <span className="font-body text-sm font-medium text-textPrimary">
+                {post.author}
+              </span>
+            </div>
+
+            <span className="text-border" aria-hidden="true">·</span>
+
+            <time
+              dateTime={post.date}
+              className="font-body text-sm text-textSecondary"
+            >
+              {formatDate(post.date)}
+            </time>
+
+            <span className="text-border" aria-hidden="true">·</span>
+
+            <span className="font-body text-sm text-textSecondary">
+              {post.readTime}
+            </span>
+          </div>
+
+          {/* CTA */}
+          <span
+            className={cn(
+              "inline-flex items-center gap-2",
+              "rounded-lg border border-accent bg-accent px-5 py-2.5",
+              "font-body text-sm font-semibold text-white",
+              "transition-all duration-200",
+              "group-hover:bg-accent-light group-hover:border-accent-light",
+              "focus-visible:outline-none"
+            )}
+          >
+            Read Article
+            <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
+          </span>
         </div>
-      </Link>
-    </RevealOnScroll>
+      </div>
+    </Link>
   );
 }
 
@@ -304,9 +316,9 @@ function NewsletterCTA() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function BlogPage() {
-  // Data fetching on the server
-  const allPosts = getAllPosts();
+export default async function BlogPage() {
+  // Data fetching on the server from Supabase
+  const allPosts = await getAllCmsPosts();
   const featuredPost = allPosts.find((p) => p.featured) ?? null;
   // Non-featured posts (or all posts if none is featured)
   const remainingPosts = allPosts.filter((p) => !p.featured || p !== featuredPost);
@@ -318,25 +330,21 @@ export default function BlogPage() {
       {/* Featured post */}
       {featuredPost && (
         <SectionWrapper bg="white" id="featured">
-          <RevealOnScroll>
-            <p className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              Featured Article
-            </p>
-          </RevealOnScroll>
+          <p className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Featured Article
+          </p>
           <FeaturedPost post={featuredPost} />
         </SectionWrapper>
       )}
 
       {/* Category filter + posts grid — BlogCategoryFilter is a client component */}
       <SectionWrapper bg="light" id="all-articles">
-        <RevealOnScroll>
-          <SectionHeading
-            overline="All Articles"
-            heading="Browse the Full Archive"
-            subheading="Filter by topic or scroll to explore every post."
-            align="left"
-          />
-        </RevealOnScroll>
+        <SectionHeading
+          overline="All Articles"
+          heading="Browse the Full Archive"
+          subheading="Filter by topic or scroll to explore every post."
+          align="left"
+        />
 
         {/*
           BlogCategoryFilter owns the selected-category state (client).

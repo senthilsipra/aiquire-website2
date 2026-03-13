@@ -7,6 +7,9 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { getAllCmsPosts } from "@/lib/blog-cms";
+import { formatDate } from "@/lib/utils";
 
 // ─── Static params + metadata ─────────────────────────────────────────────────
 
@@ -27,12 +30,40 @@ export async function generateMetadata({
     return { title: "Service Not Found" };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aiquire.ai";
+  // Determine canonical mapping for SEO routes
+  const seoSlugs: Record<string, string> = {
+    "ai-strategy-consulting": "/ai-consulting",
+    "generative-ai-llm": "/generative-ai",
+    "ai-ml-development": "/ai-engineering",
+    "ai-powered-software": "/ai-development-services",
+  };
+  const canonicalPath = seoSlugs[slug] || `/services/${slug}`;
+
   return {
-    title: service.title,
-    description: service.fullDescription,
+    title: `${service.title} | AI Consulting & Engineering`,
+    description: service.description,
+    alternates: {
+      canonical: `${siteUrl}${canonicalPath}`,
+    },
     openGraph: {
-      title: `${service.title} | Aiquire`,
-      description: service.fullDescription,
+      title: `${service.title} — AI Consulting | Aiquire`,
+      description: service.description,
+      type: "article",
+      url: `${siteUrl}${canonicalPath}`,
+      images: [
+        {
+          url: "/og-image.png", // Generic for now, but better than none
+          width: 1200,
+          height: 630,
+          alt: service.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} | Aiquire AI Consulting`,
+      description: service.description,
     },
   };
 }
@@ -366,8 +397,26 @@ export default async function ServiceDetailPage({
   // For the AI Strategy service, show all 8 sub-services; otherwise all
   const allSubServices = service.subServices;
 
+  const allPosts = await getAllCmsPosts();
+  const categoryMap: Record<string, string> = {
+    "ai-strategy-consulting": "AI Strategy",
+    "generative-ai-llm": "Generative AI",
+    "ai-ml-development": "Engineering",
+  };
+  const targetCategory = categoryMap[service.slug];
+  const relatedPosts = allPosts
+    .filter((p) => (targetCategory ? p.category === targetCategory : true))
+    .slice(0, 3);
+
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", item: "/" },
+          { name: "Services", item: "/services" },
+          { name: service.title, item: `/services/${slug}` },
+        ]}
+      />
       {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
       <section className="relative w-full overflow-hidden bg-primary">
         {/* Decorative blurs */}
@@ -847,6 +896,56 @@ export default async function ServiceDetailPage({
             ))}
         </div>
       </SectionWrapper>
+
+      {/* ── 6.5 RELATED INSIGHTS ────────────────────────────────────────── */}
+      {relatedPosts.length > 0 && (
+        <SectionWrapper bg="light" id="insights">
+          <RevealOnScroll>
+            <SectionHeading
+              overline="Internal Insights"
+              heading={`Latest on ${targetCategory || "AI"}`}
+              subheading="Practical perspectives from our team on strategy, engineering, and deployment."
+              align="left"
+            />
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {relatedPosts.map((post) => (
+              <RevealOnScroll key={post.slug}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className={cn(
+                    "group block h-full",
+                    "rounded-2xl border border-border bg-white p-6",
+                    "shadow-sm transition-all duration-300 hover:shadow-xl",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  )}
+                >
+                  <div className="mb-4">
+                    <span className="inline-flex items-center rounded-full bg-bgBlue px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-accent border border-accent/10">
+                      {post.category}
+                    </span>
+                  </div>
+                  <h3 className="mb-3 font-heading font-bold text-lg text-primary leading-snug group-hover:text-accent transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mb-5 font-body text-sm text-textSecondary line-clamp-2">
+                    {post.description}
+                  </p>
+                  <div className="mt-auto flex items-center justify-between border-t border-border pt-4">
+                    <time className="font-body text-xs text-textSecondary">
+                      {formatDate(post.date)}
+                    </time>
+                    <span className="font-body text-xs font-semibold text-accent group-hover:underline">
+                      Read More →
+                    </span>
+                  </div>
+                </Link>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* ── 7. CTA BANNER ─────────────────────────────────────────────── */}
       <CTABanner

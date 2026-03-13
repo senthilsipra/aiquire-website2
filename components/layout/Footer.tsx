@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import Image from "next/image";
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface ServiceLink {
@@ -38,7 +40,6 @@ const FOOTER_SERVICES: ServiceLink[] = [
   { slug: "generative-ai-llm", title: "Generative AI & LLM Solutions" },
   { slug: "ai-powered-software", title: "AI-Powered Software Development" },
   { slug: "mlops-infrastructure", title: "MLOps & AI Infrastructure" },
-  { slug: "ai-academy", title: "AI Training" },
   { slug: "packaged-solutions", title: "Packaged AI Solutions" },
 ];
 
@@ -49,7 +50,6 @@ const COMPANY_LINKS: CompanyLink[] = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
-  { label: "Claude Training Practice", href: "/claude-training" },
   { label: "Free AI Workflow Audit", href: "/audit" },
 ];
 
@@ -198,18 +198,17 @@ export function Footer() {
               className="inline-block transition-opacity duration-150 hover:opacity-80"
               aria-label="Aiquire home"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/images/logo.svg"
                 alt="Aiquire"
                 height={44}
-                style={{ height: 44, width: "auto", display: "block" }}
+                width={160}
+                className="h-11 w-auto block"
               />
             </Link>
 
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
-              We combine management consulting rigor with production-grade AI
-              engineering to deliver measurable business impact.
+              AIQUIRE is the AI division of Siprahub.
             </p>
 
             {/* Social links */}

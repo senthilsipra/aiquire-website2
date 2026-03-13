@@ -2,19 +2,22 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
   ChevronDown,
-  Lightbulb,
-  BrainCircuit,
-  Sparkles,
-  Code2,
-  Settings2,
+  Briefcase,
+  Brain,
+  Cpu,
+  Laptop,
+  Cloud,
   GraduationCap,
   Package,
   BookOpen,
+  ShieldCheck,
+  LogOut,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -41,38 +44,32 @@ const SERVICES: Service[] = [
   {
     slug: "ai-strategy-consulting",
     title: "AI Strategy & Business Consulting",
-    icon: Lightbulb,
+    icon: Briefcase,
     desc: "Know where AI fits.",
   },
   {
     slug: "ai-ml-development",
     title: "AI/ML Development",
-    icon: BrainCircuit,
+    icon: Brain,
     desc: "Custom models for your data.",
   },
   {
     slug: "generative-ai-llm",
     title: "Generative AI & LLM Solutions",
-    icon: Sparkles,
+    icon: Cpu,
     desc: "Beyond chatbots.",
   },
   {
     slug: "ai-powered-software",
     title: "AI-Powered Software Development",
-    icon: Code2,
+    icon: Laptop,
     desc: "Full-stack with AI built in.",
   },
   {
     slug: "mlops-infrastructure",
     title: "MLOps & AI Infrastructure",
-    icon: Settings2,
+    icon: Cloud,
     desc: "Models in production.",
-  },
-  {
-    slug: "ai-academy",
-    title: "AI Training",
-    icon: GraduationCap,
-    desc: "Upskill your entire team.",
   },
   {
     slug: "packaged-solutions",
@@ -163,17 +160,6 @@ function MegaMenu({ isOpen }: { isOpen: boolean }) {
           >
             View all services
             <ChevronDown size={14} className="-rotate-90" />
-          </Link>
-          <Link
-            href="/claude-training"
-            className={cn(
-              "inline-flex items-center gap-2 rounded-lg border border-[#2980B9]/40 bg-[#2980B9]/10 px-4 py-2",
-              "text-xs font-semibold text-[#3498DB]",
-              "transition-colors duration-150 hover:bg-[#2980B9]/20 hover:text-white"
-            )}
-          >
-            <BookOpen size={13} strokeWidth={1.75} />
-            Claude Training Practice
           </Link>
         </div>
       </div>
@@ -329,12 +315,13 @@ function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
             aria-label="Aiquire home"
             className="flex items-center"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/logo.svg"
               alt="Aiquire"
               height={28}
-              style={{ height: 28, width: "auto", display: "block" }}
+              width={100}
+              className="h-7 w-auto block"
+              priority
             />
           </Link>
           <button
@@ -494,7 +481,7 @@ function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
         </nav>
 
         {/* CTA at bottom */}
-        <div className="border-t border-white/10 px-6 py-6">
+        <div className="border-t border-white/10 px-6 py-6 flex flex-col gap-3">
           <Link
             href="/contact"
             onClick={onClose}
@@ -505,6 +492,17 @@ function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
             )}
           >
             Book a Call
+          </Link>
+          <Link
+            href="/admin/login"
+            onClick={onClose}
+            className={cn(
+              "flex items-center justify-center gap-2 w-full rounded-full border border-white/20 px-6 py-3",
+              "text-sm font-semibold text-white/70",
+              "transition-colors duration-150 hover:bg-white/10 hover:text-white"
+            )}
+          >
+            <ShieldCheck size={15} /> Admin Login
           </Link>
         </div>
       </div>
@@ -520,10 +518,26 @@ export function Navigation() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [trainingOpen, setTrainingOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const megaRef = useRef<HTMLLIElement>(null);
   const trainingRef = useRef<HTMLLIElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const trainingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Check admin session
+  useEffect(() => {
+    fetch('/api/admin-session')
+      .then(r => r.json())
+      .then(d => setIsAdmin(d.loggedIn === true))
+      .catch(() => setIsAdmin(false));
+  }, [pathname]);
+
+  async function handleAdminLogout() {
+    await fetch('/api/admin-session', { method: 'DELETE' }).catch(() => {});
+    document.cookie = 'admin_session=; Max-Age=0; path=/';
+    setIsAdmin(false);
+    window.location.href = '/admin/login';
+  }
 
   // Detect scroll to add shadow
   useEffect(() => {
@@ -600,12 +614,13 @@ export function Navigation() {
           className="flex items-center py-3.5 transition-opacity duration-150 hover:opacity-80"
           aria-label="Aiquire home"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/logo.svg"
             alt="Aiquire"
             height={36}
-            style={{ height: 36, width: "auto", display: "block" }}
+            width={120}
+            className="h-9 w-auto block"
+            priority
           />
         </Link>
 
@@ -719,8 +734,46 @@ export function Navigation() {
             })}
           </ul>
 
-          {/* CTA */}
-          <div className="ml-4 pl-4">
+          {/* CTA group */}
+          <div className="ml-4 pl-4 flex items-center gap-2">
+            {/* Admin button */}
+            {isAdmin ? (
+              <>
+                <Link
+                  href="/admin/blog"
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2",
+                    "text-sm font-semibold text-white/90",
+                    "transition-colors duration-150 hover:bg-white/20 hover:text-white"
+                  )}
+                >
+                  <ShieldCheck size={14} /> Admin
+                </Link>
+                <button
+                  onClick={handleAdminLogout}
+                  title="Logout"
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full border border-[#ce2124]/50 bg-[#ce2124]/15 px-4 py-2",
+                    "text-sm font-semibold text-white/80",
+                    "transition-colors duration-150 hover:bg-[#ce2124]/30 hover:text-white"
+                  )}
+                >
+                  <LogOut size={14} /> Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/admin/login"
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2",
+                  "text-sm font-semibold text-white/80",
+                  "transition-colors duration-150 hover:bg-white/20 hover:text-white"
+                )}
+              >
+                <ShieldCheck size={14} /> Admin Login
+              </Link>
+            )}
+
             <Link
               href="/contact"
               className={cn(
