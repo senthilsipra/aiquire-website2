@@ -1,0 +1,17 @@
+/* Admin-only overrides — injected via app/admin/layout.tsx import */
+/* Hides the public website Navigation and Footer on all /admin/* routes */
+
+#public-nav,
+#public-footer {
+  display: none !important;
+}
+
+/* Reset the body flex layout set by the root layout */
+body:has(#public-nav[style*="display: none"]),
+body:has(.admin-shell) {
+  display: block !important;
+}
+
+body > main:has(.admin-content) {
+  flex: none !important;
+}

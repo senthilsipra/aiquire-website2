@@ -1,0 +1,25 @@
+
+C:\ag\aiquire-website2\app\admin\blog\_components\BlogPostForm.tsx
+  335:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\ag\aiquire-website2\app\admin\blog\page.tsx
+  206:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\ag\aiquire-website2\app\admin\login\page.tsx
+  22:9  error  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\ag\aiquire-website2\app\blog\BlogCategoryFilter.tsx
+  80:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\ag\aiquire-website2\app\blog\[slug]\page.tsx
+  163:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\ag\aiquire-website2\app\blog\page.tsx
+    5:10  error    'RevealOnScroll' is defined but never used                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  149:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\ag\aiquire-website2\app\case-studies\page.tsx
+  7:10  error  'SITE_NAME' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 8 problems (3 errors, 5 warnings)
+
