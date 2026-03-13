@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { BLOG_CATEGORIES, type BlogPost } from "@/lib/blog";
 import { getAllCmsPosts } from "@/lib/blog-cms";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";

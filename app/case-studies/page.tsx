@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { CASE_STUDIES } from "@/lib/case-studies";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { CaseStudyFilters } from "./CaseStudyFilters";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
