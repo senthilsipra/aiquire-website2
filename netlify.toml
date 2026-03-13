@@ -1,0 +1,9 @@
+[build]
+  command   = "npm run build"
+  publish   = ".next"
+
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "SUPABASE_SERVICE_ROLE_KEY,DATABASE_URL,ADMIN_PASSWORD,NEXT_PUBLIC_SUPABASE_ANON_KEY"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
