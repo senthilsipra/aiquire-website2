@@ -277,9 +277,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Gamified progress cues encourage consistent engagement and daily learning habits",
       "Adaptive retry loops let learners progress at a personalized pace until concepts are mastered"
     ],
-    techTags: ["FastAPI", "Supabase", "React", "Google Gemini", "Celery", "Redis"],
+    techTags: ["FastAPI", "PostgreSQL", "Supabase", "React", "Tailwind", "Google Gemini", "OpenRouter", "AssemblyAI", "Celery", "Redis"],
     accentColor: "var(--accent)",
-    about: "This learning management system is an AI-native adaptive learning ecosystem designed to improve how engineering concepts are taught and practiced. It combines a 24/7 AI copilot tutor, automated IDE Workspace and AI Labs generation, AI-graded lab assignments, a browser-based IDE, real-time analytics, and synchronization between web and local development environments into one premium platform.",
+    about: "The platform uses FastAPI (Python) for an asynchronous backend, PostgreSQL/Supabase for robust data management, and Tailwind-powered React for a modern, fluid frontend. AI capabilities are driven by Google Gemini and OpenRouter, with AssemblyAI and yt-dlp handling media ingestion. The IDE Workspace is built using advanced browser-based code editors with a companion VS Code extension, while AI Lab Assignments utilize a custom-built grading engine. Heavy processing tasks are managed by Celery and Redis, while the AI Copilot uses specialized prompt pipelines to provide context-aware assistance.",
     companySize: "Platform build",
     duration: "Multi-phase rollout",
     teamSize: "Full-stack AI product team",
