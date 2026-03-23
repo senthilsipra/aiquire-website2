@@ -230,19 +230,19 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         text: "We needed a platform that could seamlessly manage the entire manuscript editing workflow while handling multiple user roles, complex status transitions, and reliable file management. Our existing processes were manual and error-prone.",
         author: "Dr Rajalakshmi",
-        role: "Principal Editor",
+        role: "",
         section: "challenge"
       },
       {
         text: "The platform has transformed our operations. We now have complete visibility into every manuscript's journey, automated notifications keep everyone informed, and our editors can focus on what they do best—editing.",
         author: "Dr Rajalakshmi",
-        role: "Principal Editor",
+        role: "",
         section: "solution"
       },
       {
         text: "SipraHub's editorial management platform has completely transformed how we operate. Our team can now manage hundreds of manuscripts simultaneously with complete visibility and control. The automated workflows save us countless hours every week.",
         author: "Dr Rajalakshmi",
-        role: "Principal Editor",
+        role: "",
         section: "benefits"
       }
     ]
@@ -259,13 +259,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcomeShort: "Unified learning, assessment, and hands-on engineering practice in one AI-native platform",
     results: [
       "Gemini 1.5 Pro LLM",
-      "Supabase Real-time",
-      "FastAPI & Celery"
+      "FastAPI Async Ops",
+      "Supabase Real-time Sync"
     ],
     highlightStats: [
       "Gemini 1.5 Pro LLM",
-      "Supabase Real-time",
-      "FastAPI & Celery"
+      "FastAPI Async Ops",
+      "Supabase Real-time Sync"
     ],
     benefits: [
       "Scalable automation removes manual Lab creation and reduces instructor overhead",
