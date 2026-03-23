@@ -230,19 +230,19 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         text: "We needed a platform that could seamlessly manage the entire manuscript editing workflow while handling multiple user roles, complex status transitions, and reliable file management. Our existing processes were manual and error-prone.",
         author: "Dr Rajalakshmi",
-        role: "",
+        role: "Principal Editor, ContentConcepts Editorial Services",
         section: "challenge"
       },
       {
         text: "The platform has transformed our operations. We now have complete visibility into every manuscript's journey, automated notifications keep everyone informed, and our editors can focus on what they do best—editing.",
         author: "Dr Rajalakshmi",
-        role: "",
+        role: "Principal Editor, ContentConcepts Editorial Services",
         section: "solution"
       },
       {
         text: "SipraHub's editorial management platform has completely transformed how we operate. Our team can now manage hundreds of manuscripts simultaneously with complete visibility and control. The automated workflows save us countless hours every week.",
         author: "Dr Rajalakshmi",
-        role: "",
+        role: "Principal Editor, ContentConcepts Editorial Services",
         section: "benefits"
       }
     ]
@@ -258,14 +258,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     solution: "A scalable asynchronous LMS architecture with shared AI context, real-time synchronization, and automated educational workflows.",
     outcomeShort: "Unified learning, assessment, and hands-on engineering practice in one AI-native platform",
     results: [
-      "Gemini 1.5 Pro LLM",
-      "FastAPI Async Ops",
-      "Supabase Real-time Sync"
+      "Gemini 1.5 Pro AI",
+      "FastAPI Async Backend",
+      "Supabase Real-time DB"
     ],
     highlightStats: [
-      "Gemini 1.5 Pro LLM",
-      "FastAPI Async Ops",
-      "Supabase Real-time Sync"
+      "Gemini 1.5 Pro AI",
+      "FastAPI Async Backend",
+      "Supabase Real-time DB"
     ],
     benefits: [
       "Scalable automation removes manual Lab creation and reduces instructor overhead",
