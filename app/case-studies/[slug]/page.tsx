@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, TrendingUp, Quote } from "lucide-react";
-import { CASE_STUDIES } from "@/lib/case-studies";
+import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
@@ -47,7 +47,7 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
       ? [{ src: study.secondaryImage, alt: `${study.title} Interface` }]
       : [];
 
-  function renderQuoteCard(quote: NonNullable<typeof study.quotes>[number]) {
+  function renderQuoteCard(quote: NonNullable<CaseStudy["quotes"]>[number]) {
     return (
       <div className="py-10 md:py-12 border-y border-border/50 relative">
         <blockquote className="border-l-4 border-accent pl-6 py-3 relative">

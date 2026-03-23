@@ -46,7 +46,7 @@ function MeshGradient() {
 }
 
 function FloatingDots() {
-  const dots = [
+  const dots: { top: string; left?: string; right?: string; size: number; delay: number }[] = [
     { top: "15%", left: "8%", size: 6, delay: 0 },
     { top: "72%", left: "5%", size: 4, delay: 1.5 },
     { top: "30%", right: "6%", size: 5, delay: 0.8 },
@@ -61,8 +61,8 @@ function FloatingDots() {
           className="absolute rounded-full bg-accent/30"
           style={{
             top: dot.top,
-            left: (dot as any).left,
-            right: (dot as any).right,
+            left: dot.left,
+            right: dot.right,
             width: dot.size,
             height: dot.size,
           }}
