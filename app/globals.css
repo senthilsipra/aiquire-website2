@@ -4,21 +4,43 @@
 
 /* ─── CSS Variables ──────────────────────────────────────────── */
 :root {
-  --primary: #0F2B46;
-  --accent: #2980B9;
-  --accent-light: #3498DB;
-  --success: #27AE60;
+  --primary: 209 65% 17%;
+  /* Old Navy Blue (#0F2B46) */
+  --primary-foreground: 0 0% 100%;
+  --accent: 204 64% 45%;
+  /* Old Accent (#2980B9) */
+  --accent-foreground: 0 0% 100%;
+  --accent-light: 204 70% 53%;
+  /* Old Accent Light (#3498DB) */
+  --border: 220 13% 91%;
   --bg-light: #F8F9FA;
   --bg-blue: #EBF5FB;
   --text-primary: #2C3E50;
   --text-secondary: #5D6D7E;
-  --border: #D5D8DC;
+  --success: 145 63% 42%;
+  /* #27AE60 */
+  --gradient-subtle: 220 13% 98%;
+  --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 13% 98%) 100%);
+  --shadow-card: 0 4px 24px -4px hsl(209 65% 17% / 0.08);
 
   /* Font vars — loaded via next/font */
   --font-heading: var(--font-cabinet), 'Cabinet Grotesk', sans-serif;
   --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
+
+.bg-gradient-card {
+  background: var(--gradient-card);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 
 /* ─── Base ────────────────────────────────────────────────────── */
 * {
@@ -39,16 +61,15 @@ body {
   line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  color: var(--primary);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-primary leading-[1.15] tracking-tight;
+  }
 }
 
 /* ─── Utilities ───────────────────────────────────────────────── */
@@ -135,19 +156,83 @@ h6 {
 }
 
 /* ─── Blog HTML Content (from Rich Text Editor) ──────────────── */
-.blog-html-content h1 { font-size: 1.875rem; font-weight: 700; color: var(--primary); margin: 1.5em 0 0.5em; line-height: 1.25; }
-.blog-html-content h2 { font-size: 1.5rem;   font-weight: 700; color: var(--primary); margin: 1.4em 0 0.4em; line-height: 1.3; }
-.blog-html-content h3 { font-size: 1.25rem;  font-weight: 600; color: var(--primary); margin: 1.2em 0 0.4em; line-height: 1.35; }
-.blog-html-content p  { margin-bottom: 1.25em; line-height: 1.75; font-size: 1.0625rem; color: var(--text-primary); }
-.blog-html-content ul { list-style: disc;    padding-left: 1.5em; margin-bottom: 1.25em; }
-.blog-html-content ol { list-style: decimal; padding-left: 1.5em; margin-bottom: 1.25em; }
-.blog-html-content li { margin-bottom: 0.4em; line-height: 1.7; font-size: 1.0625rem; }
-.blog-html-content strong { font-weight: 700; color: var(--text-primary); }
-.blog-html-content em { font-style: italic; }
-.blog-html-content u  { text-decoration: underline; }
-.blog-html-content s  { text-decoration: line-through; color: var(--text-secondary); }
-.blog-html-content a  { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
-.blog-html-content a:hover { color: var(--accent-light); }
+.blog-html-content h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 1.5em 0 0.5em;
+  line-height: 1.25;
+}
+
+.blog-html-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 1.4em 0 0.4em;
+  line-height: 1.3;
+}
+
+.blog-html-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 1.2em 0 0.4em;
+  line-height: 1.35;
+}
+
+.blog-html-content p {
+  margin-bottom: 1.25em;
+  line-height: 1.75;
+  font-size: 1.0625rem;
+  color: var(--text-primary);
+}
+
+.blog-html-content ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.blog-html-content ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.blog-html-content li {
+  margin-bottom: 0.4em;
+  line-height: 1.7;
+  font-size: 1.0625rem;
+}
+
+.blog-html-content strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.blog-html-content em {
+  font-style: italic;
+}
+
+.blog-html-content u {
+  text-decoration: underline;
+}
+
+.blog-html-content s {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.blog-html-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-html-content a:hover {
+  color: var(--accent-light);
+}
+
 .blog-html-content blockquote {
   border-left: 4px solid var(--accent);
   padding: 8px 0 8px 20px;
@@ -155,10 +240,37 @@ h6 {
   color: var(--text-secondary);
   font-style: italic;
 }
-.blog-html-content hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
-.blog-html-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.5em 0; display: block; }
-.blog-html-content code { font-family: var(--font-mono); font-size: 0.875em; background: var(--bg-light); padding: 2px 6px; border-radius: 4px; }
-.blog-html-content pre  { background: var(--primary); color: white; border-radius: 12px; padding: 24px; overflow-x: auto; margin: 1.5em 0; }
+
+.blog-html-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+.blog-html-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5em 0;
+  display: block;
+}
+
+.blog-html-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.blog-html-content pre {
+  background: var(--primary);
+  color: white;
+  border-radius: 12px;
+  padding: 24px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
 
 /* ─── RTE Loading state ───────────────────────────────────────── */
 .rte-loading {

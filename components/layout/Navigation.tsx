@@ -95,7 +95,7 @@ function MegaMenu({ isOpen }: { isOpen: boolean }) {
   return (
     <div
       className={cn(
-        "absolute left-1/2 top-full z-50 mt-0 w-[680px] -translate-x-1/2",
+        "absolute left-0 top-full z-[60] mt-2 w-[680px]",
         "transition-all duration-200 ease-out",
         isOpen
           ? "pointer-events-auto translate-y-0 opacity-100"
@@ -104,7 +104,7 @@ function MegaMenu({ isOpen }: { isOpen: boolean }) {
       aria-hidden={!isOpen}
     >
       {/* Invisible bridge to prevent gap-triggered mouseleave */}
-      <div className="h-3 w-full" />
+      <div className="h-2 w-full" />
 
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a2035] shadow-2xl shadow-black/40">
         {/* Header strip */}
@@ -173,7 +173,7 @@ function TrainingMegaMenu({ isOpen }: { isOpen: boolean }) {
   return (
     <div
       className={cn(
-        "absolute left-1/2 top-full z-50 mt-0 w-[340px] -translate-x-1/2",
+        "absolute left-0 top-full z-[60] mt-2 w-[340px]",
         "transition-all duration-200 ease-out",
         isOpen
           ? "pointer-events-auto translate-y-0 opacity-100"
@@ -182,7 +182,7 @@ function TrainingMegaMenu({ isOpen }: { isOpen: boolean }) {
       aria-hidden={!isOpen}
     >
       {/* Invisible bridge */}
-      <div className="h-3 w-full" />
+      <div className="h-2 w-full" />
 
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a2035] shadow-2xl shadow-black/40">
         {/* Header strip */}
@@ -602,8 +602,8 @@ export function Navigation() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full bg-[#0F2B46]",
-        "transition-shadow duration-300",
+        "sticky top-0 z-50 w-full bg-[#0F2B46]",
+        "overflow-visible transition-shadow duration-300",
         scrolled && "shadow-lg shadow-black/30"
       )}
     >
@@ -648,7 +648,7 @@ export function Navigation() {
                         "transition-colors duration-150",
                         active || megaOpen
                           ? "text-[#3498DB]"
-                          : "text-white/75 hover:text-white"
+                          : "text-white/75"
                       )}
                     >
                       {link.label}
@@ -660,12 +660,6 @@ export function Navigation() {
                         )}
                       />
                     </button>
-
-                    {/* Bottom active indicator */}
-                    {(active || megaOpen) && (
-                      <span className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full bg-[#2980B9]" />
-                    )}
-
                     <MegaMenu isOpen={megaOpen} />
                   </li>
                 );
@@ -689,7 +683,7 @@ export function Navigation() {
                         "transition-colors duration-150",
                         active || trainingOpen
                           ? "text-[#3498DB]"
-                          : "text-white/75 hover:text-white"
+                          : "text-white/75"
                       )}
                     >
                       {link.label}
@@ -701,12 +695,6 @@ export function Navigation() {
                         )}
                       />
                     </button>
-
-                    {/* Bottom active indicator */}
-                    {(active || trainingOpen) && (
-                      <span className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full bg-[#2980B9]" />
-                    )}
-
                     <TrainingMegaMenu isOpen={trainingOpen} />
                   </li>
                 );
@@ -719,16 +707,11 @@ export function Navigation() {
                     className={cn(
                       "block px-4 py-6 text-sm font-medium",
                       "transition-colors duration-150",
-                      active ? "text-[#3498DB]" : "text-white/75 hover:text-white"
+                      active ? "text-[#3498DB]" : "text-white/75"
                     )}
                   >
                     {link.label}
                   </Link>
-
-                  {/* Bottom active indicator */}
-                  {active && (
-                    <span className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full bg-[#2980B9]" />
-                  )}
                 </li>
               );
             })}

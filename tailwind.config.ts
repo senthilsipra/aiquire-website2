@@ -10,20 +10,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#0F2B46",
-          50: "#E8F0F6",
-          100: "#C5D7E9",
-          200: "#9FBCD9",
-          300: "#79A1C9",
-          400: "#5386B9",
-          500: "#2D6BA9",
-          600: "#275E93",
-          700: "#1F4D7A",
-          800: "#173C61",
-          900: "#0F2B46",
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
         accent: {
-          DEFAULT: "#2980B9",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
           light: "#3498DB",
           dark: "#1A5E8A",
         },
@@ -32,7 +24,8 @@ const config: Config = {
         bgBlue: "#EBF5FB",
         textPrimary: "#2C3E50",
         textSecondary: "#5D6D7E",
-        border: "#D5D8DC",
+        border: "hsl(var(--border))",
+        "gradient-subtle": "hsl(var(--gradient-subtle))",
       },
       fontFamily: {
         heading: ["var(--font-cabinet)", "var(--font-satoshi)", "sans-serif"],
@@ -49,6 +42,7 @@ const config: Config = {
         "fade-up": "fadeUp 0.6s ease forwards",
         "fade-in": "fadeIn 0.4s ease forwards",
         "count-up": "countUp 1.5s ease forwards",
+        appear: "appear 0.5s ease-out forwards",
       },
       keyframes: {
         fadeUp: {
@@ -58,6 +52,10 @@ const config: Config = {
         fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
+        },
+        appear: {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
       transitionTimingFunction: {

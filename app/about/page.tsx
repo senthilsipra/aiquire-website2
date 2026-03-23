@@ -197,11 +197,10 @@ function HowWeThink() {
       {/* Phase activity cards */}
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {DIAMOND_PHASES.map((phase, i) => (
-          <RevealOnScroll key={phase.phase} delay={i * 80}>
+          <RevealOnScroll key={phase.phase} delay={i * 80} className="h-full">
             <div
               className={cn(
-                "rounded-2xl border border-border bg-white p-6",
-                "flex flex-col gap-4",
+                "flex h-full min-h-[300px] flex-col gap-4 rounded-2xl border border-border bg-white p-5",
                 "shadow-sm hover:shadow-md transition-shadow duration-200"
               )}
             >

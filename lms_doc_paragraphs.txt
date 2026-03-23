@@ -1,0 +1,38 @@
+Case Study:  Learning Management System using Antigravity
+User role: 2
+Workflow automation: 100%
+About:
+Learning Management System is an AI-native adaptive learning ecosystem designed to revolutionize how engineering concepts are taught and mastered. Beyond simple video hosting, the platform integrates an intelligent AI Copilot that acts as a 24/7 tutor, an automated quiz generation engine that transforms transcripts into assessments, and a professional-grade IDE workspace for hands-on practice. The platform also features advanced AI Lab Assignments for prompt engineering challenges, real-time progress analytics for granular tracking, and a seamless synchronization system between web and local development environments. It is a comprehensive, end-to-end solution that combines content delivery, skill validation, and practical engineering in a single, premium interface.
+Technology Stack:
+The platform uses FastAPI (Python) for an asynchronous backend, PostgreSQL/Supabase for robust data management, and Tailwind-powered React for a modern, fluid frontend. AI capabilities are driven by Google Gemini and OpenRouter, with AssemblyAI and yt-dlp handling media ingestion. The IDE Workspace is built using advanced browser-based code editors with a companion VS Code extension, while AI Lab Assignments utilize a custom-built grading engine. Heavy processing tasks are managed by Celery and Redis, while the AI Copilot uses specialized prompt pipelines to provide context-aware assistance.
+User Personas:
+The platform caters to Learners, who are engineering students or professionals seeking structured paths, interactive coding practice, and instant AI-driven tutoring; and Administrators (Instructors), who focus on content creation, automated skill validation, and monitoring platform-wide performance through advanced data visualizations and progress reports.
+Challenge:
+Addressing Complex AI Integration and Real-Time System Challenges:
+The primary challenges faced during development centered on the technical complexity of synchronizing diverse AI services and managing real-time data flow. We struggled with significant latency issues when processing long video transcripts and generating high-quality quizzes on-the-fly, which threatened to disrupt the user experience. Additionally, maintaining consistency between the state of the browser-based IDE and the user's local VS Code extension presented a major synchronization hurdle. Ensuring the AI Judge for lab assignments remained objective and accurate across different student prompt styles was also a significant obstacle, as was the task of making the entire platform feel cohesive while integrating multiple external APIs for transcription, LLMs, and media processing.
+“Building this platform wasn’t just about adding AI—it was about making everything work together in real time. We faced constant challenges with latency, system synchronization, and ensuring our AI evaluations stayed fair and consistent. Balancing performance with a smooth user experience required continuous iteration and problem-solving.”
+— Core Development Team
+Solution:
+A Scalable, AI-Driven Architecture Enabled Seamless Performance and Intelligent Learning:
+To overcome these challenges, we implemented a robust asynchronous architecture using Celery and Redis, which offloads heavy AI tasks to background workers and allows the UI to remain responsive through a polling system. For the IDE synchronization, we leveraged Supabase’s real-time capabilities to create a "single source of truth" that updates instantly across both the web and local environments. The feedback quality was improved by developing a multi-stage prompt pipeline that uses a "Refinery" process, where one AI agent generates content and a second "Critic" agent validates it against strict educational schemas. We also integrated a centralized AI Copilot logic that shares context across all features, ensuring that the assistant understands the user's current module, code, and quiz progress to provide truly personalized help.
+“SipraHub designed and delivered a robust, scalable solution that transforms complexity into a seamless learning experience. Through advanced AI architecture, real-time synchronization, and intelligent validation systems, the platform ensures high performance, accuracy, and personalization at scale.”
+— Development Team, LMS
+Feature Deep-Dive:
+Powering Intelligent Learning Through Advanced AI-Driven Features:
+AI Copilot & Tutoring acts as a brilliant digital assistant integrated throughout the platform. It provides instant explanations for complex topics, helps debug code in the IDE, and offers personalized hints during lab challenges, ensuring that learners never hit a "dead end" in their journey.
+Automated Quiz Generation leverages AI to analyze video transcripts and module documents, instantly creating context-aware multiple-choice questions. This ensures that assessments are always perfectly aligned with the latest course materials without manual intervention.
+Integrated IDE Workspace offers a high-performance, browser-based coding environment that syncs across sessions. It includes a custom VS Code extension, allowing professional-grade development workflows to stay connected with the learning platform's curriculum.
+AI Lab Assignments challenge students with Prompt Engineering and coding tasks evaluated by an AI "Judge." The system provides immediate scoring and constructive feedback, facilitating a rapid "practice-feedback-retry" learning loop.
+Progress Reports & UI focus on a high-end aesthetic using glassmorphism and smooth animations. The reporting system provides real-time metrics, including learning streaks, average scores, and time-series charts for instructors to track student engagement.
+“SipraHub’s AI-powered learning platform has transformed the way students engage with technical education. By combining intelligent tutoring, automated assessments, and a unified coding environment, the platform delivers a seamless and highly personalized learning experience. Real-time feedback, adaptive learning paths, and data-driven insights empower both learners and instructors, significantly improving engagement, efficiency, and overall learning outcomes.”
+— Product & Development Team, LMS
+Benefits:
+Enhancing Engagement, Efficiency, and Career Readiness with AI:
+Scalable Automation: Eliminates manual quiz creation, allowing instructors to focus on teaching rather than administration.
+Unified Experience: Consolidates videos, code, and tests into one tab, reducing cognitive load and switching costs.
+AI-Powered Mentorship: The Copilot provides 24/7 support, reducing the need for constant instructor availability.
+Data-Driven Insights: Enables instructors to pinpoint exact modules where students struggle by analyzing aggregate score data.
+Career Readiness: The IDE and Lab focus prepare students for modern, AI-augmented engineering roles.
+Instant Feedback Loops: AI scoring reduces the wait time for grades from days to seconds, maintaining learner momentum.
+High Engagement: Gamified elements like streaks and visual progress bars encourage consistent daily learning habits.
+Adaptive Learning: Provides a personalized pace where students can retry challenges until they master the material.
