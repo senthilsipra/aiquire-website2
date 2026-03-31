@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BLOG_CATEGORIES, type BlogPost } from "@/lib/blog";
@@ -147,10 +148,12 @@ function FeaturedPost({ post }: { post: BlogPost }) {
       <div className="flex flex-col lg:flex-row">
         {post.coverImage ? (
           <div className="lg:w-2/5 shrink-0 relative h-64 lg:h-auto overflow-hidden">
-            <img
+            <Image
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              priority
             />
             <div
               className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:bg-gradient-to-r"

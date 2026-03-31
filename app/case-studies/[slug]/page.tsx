@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, CheckCircle2, TrendingUp, Quote } from "lucide-react";
 import { CASE_STUDIES, type CaseStudy } from "@/lib/case-studies";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -220,9 +221,11 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
                     <div key={image.src} className="relative group space-y-4">
                       <div className="absolute inset-x-0 -bottom-12 -top-12 bg-accent/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
                       <div className="aspect-[16/10] bg-white rounded-3xl border border-border shadow-2xl relative overflow-hidden group-hover:border-accent/30 transition-all duration-500">
-                        <img
+                        <Image
                           src={image.src}
                           alt={image.alt || `${study.title} Interface ${index + 1}`}
+                          width={800}
+                          height={500}
                           className={cn(
                             "w-full h-full group-hover:scale-[1.02] transition-transform duration-700",
                             study.slug === "digital-assistant-clinic" ? "object-contain bg-white p-2 md:p-3" : "object-cover"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getCmsPostBySlug, getAllCmsPosts, getCmsPostMetadata } from "@/lib/blog-cms";
 import { formatDate } from "@/lib/utils";
@@ -159,11 +160,13 @@ export default async function BlogPostPage({
             )}
           >
             {post.coverImage && (
-              <div className="mb-10 w-full overflow-hidden rounded-2xl bg-gray-100">
-                <img
+              <div className="mb-10 w-full overflow-hidden rounded-2xl bg-gray-100 relative min-h-[300px]">
+                <Image
                   src={post.coverImage}
                   alt={post.title}
-                  className="w-full object-cover max-h-[500px]"
+                  fill
+                  className="object-cover"
+                  priority
                 />
               </div>
             )}

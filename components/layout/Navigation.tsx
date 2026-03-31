@@ -16,8 +16,6 @@ import {
   GraduationCap,
   Package,
   BookOpen,
-  Plus,
-  ShieldCheck,
   LogOut,
   type LucideIcon,
 } from "lucide-react";

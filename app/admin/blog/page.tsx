@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   PlusCircle,
   Pencil,
@@ -203,11 +204,13 @@ export default function AdminBlogPage() {
                   <td>
                     <div className="post-title-cell">
                       {post.cover_image && (
-                        <img
+                        <Image
                           src={post.cover_image}
                           alt=""
+                          width={48}
+                          height={36}
                           className="post-thumb"
-                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                          unoptimized={post.cover_image.startsWith('blob:')}
                         />
                       )}
                       <div>

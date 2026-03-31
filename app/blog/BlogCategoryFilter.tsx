@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn, formatDate } from "@/lib/utils";
 import { type BlogPost } from "@/lib/blog";
 
@@ -76,11 +77,12 @@ export function BlogCategoryFilter({ posts, allPosts, categories }: BlogCategory
                 className="group flex flex-col h-full rounded-2xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
               >
                 {post.coverImage ? (
-                  <div className="w-full h-48 shrink-0 overflow-hidden bg-gray-100">
-                    <img
+                  <div className="w-full h-48 shrink-0 overflow-hidden bg-gray-100 relative">
+                    <Image
                       src={post.coverImage}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 ) : (
