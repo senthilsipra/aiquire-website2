@@ -32,5 +32,5 @@ export async function loginAdmin(email: string, password: string) {
  */
 export async function logoutAdmin() {
   cookies().delete('admin_session');
-  redirect('/admin/login');
+  redirect('/');
 }

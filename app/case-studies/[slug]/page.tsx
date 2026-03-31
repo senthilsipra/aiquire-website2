@@ -213,7 +213,7 @@ export default function CaseStudyDetailPage({ params }: PageProps) {
                 <div
                   className={cn(
                     "grid gap-12",
-                    solutionImages.length > 1 && !["digital-assistant-clinic", "learning-management-system-antigravity"].includes(study.slug) ? "md:grid-cols-2" : "grid-cols-1"
+                    solutionImages.length > 1 && !["digital-assistant-clinic", "learning-management-system-antigravity", "editorial-management-platform"].includes(study.slug) ? "md:grid-cols-2" : "grid-cols-1"
                   )}
                 >
                   {solutionImages.map((image, index) => (

@@ -98,7 +98,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </span>
             </div>
             <div className="admin-topbar-right">
-              <span className="admin-badge">v1.0</span>
+              <Link href="/admin/blog/new" className="admin-btn-new">
+                <PlusCircle size={14} /> New Post
+              </Link>
+              <div className="admin-topbar-divider" />
+              <Link href="/" className="admin-topbar-link">
+                <Globe size={14} /> View Website
+              </Link>
+              <div className="admin-topbar-divider" />
+              <button
+                onClick={handleLogout}
+                disabled={isPending}
+                className="admin-topbar-logout"
+              >
+                <LogOut size={14} />
+                {isPending ? '...' : 'Logout'}
+              </button>
             </div>
           </header>
 
@@ -279,6 +294,65 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           font-weight: 500;
         }
 
+        .admin-topbar-right {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .admin-btn-new {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: #ce2124;
+          color: white;
+          font-size: 13px;
+          font-weight: 600;
+          text-decoration: none;
+          padding: 8px 14px;
+          border-radius: 8px;
+          transition: background 0.15s;
+        }
+        .admin-btn-new:hover { background: #a81a1d; }
+
+        .admin-topbar-link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #6b7280;
+          font-size: 13px;
+          text-decoration: none;
+          transition: color 0.15s;
+          font-weight: 500;
+        }
+        .admin-topbar-link:hover { color: #111827; }
+
+        .admin-topbar-divider {
+          width: 1px;
+          height: 16px;
+          background: #e5e7eb;
+        }
+
+        .admin-topbar-logout {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: transparent;
+          border: none;
+          color: #ce2124;
+          font-size: 13px;
+          font-weight: 600;
+          cursor: pointer;
+          padding: 6px 10px;
+          border-radius: 6px;
+          transition: background 0.15s;
+          font-family: inherit;
+        }
+        .admin-topbar-logout:hover:not(:disabled) {
+          background: rgba(206,33,36,0.05);
+        }
+        .admin-topbar-logout:disabled { opacity: 0.5; }
+
         .admin-badge {
           background: #f3f4f6;
           color: #6b7280;
@@ -286,12 +360,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           font-weight: 600;
           padding: 2px 8px;
           border-radius: 99px;
-        }
-
-        .admin-topbar-right {
-          display: flex;
-          align-items: center;
-          gap: 12px;
         }
 
         .admin-content {

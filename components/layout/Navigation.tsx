@@ -16,10 +16,12 @@ import {
   GraduationCap,
   Package,
   BookOpen,
+  Plus,
   ShieldCheck,
   LogOut,
   type LucideIcon,
 } from "lucide-react";
+import { logoutAdmin } from "@/app/admin/actions";
 import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -257,9 +259,11 @@ interface MobileMenuProps {
   isOpen: boolean;
   pathname: string;
   onClose: () => void;
+  isAdmin: boolean;
+  onLogout: () => void;
 }
 
-function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
+function MobileMenu({ isOpen, pathname, onClose, isAdmin, onLogout }: MobileMenuProps) {
   const [servicesExpanded, setServicesExpanded] = useState(false);
   const [trainingExpanded, setTrainingExpanded] = useState(false);
 
@@ -493,17 +497,21 @@ function MobileMenu({ isOpen, pathname, onClose }: MobileMenuProps) {
           >
             Book a Call
           </Link>
-          <Link
-            href="/admin/login"
-            onClick={onClose}
-            className={cn(
-              "flex items-center justify-center gap-2 w-full rounded-full border border-white/20 px-6 py-3",
-              "text-sm font-semibold text-white/70",
-              "transition-colors duration-150 hover:bg-white/10 hover:text-white"
-            )}
-          >
-            <ShieldCheck size={15} /> Admin Login
-          </Link>
+          {isAdmin && (
+            <button
+              onClick={() => {
+                onLogout();
+                onClose();
+              }}
+              className={cn(
+                "flex items-center justify-center gap-2 w-full rounded-full border border-[#ce2124]/30 bg-[#ce2124]/10 px-6 py-3",
+                "text-sm font-semibold text-white/70",
+                "transition-colors duration-150 hover:bg-[#ce2124]/20 hover:text-white"
+              )}
+            >
+              <LogOut size={15} /> Logout
+            </button>
+          )}
         </div>
       </div>
     </>
@@ -526,17 +534,22 @@ export function Navigation() {
 
   // Check admin session
   useEffect(() => {
-    fetch('/api/admin-session')
+    fetch('/api/admin-session', { cache: 'no-store' })
       .then(r => r.json())
-      .then(d => setIsAdmin(d.loggedIn === true))
-      .catch(() => setIsAdmin(false));
+      .then(d => {
+        if (d.loggedIn === true) setIsAdmin(true);
+        else setIsAdmin(false);
+      })
+      .catch(() => {
+        // Fallback to checking for the cookie directly if API fails
+        const hasCookie = document.cookie.includes('admin_session=true');
+        setIsAdmin(hasCookie);
+      });
   }, [pathname]);
 
   async function handleAdminLogout() {
-    await fetch('/api/admin-session', { method: 'DELETE' }).catch(() => {});
-    document.cookie = 'admin_session=; Max-Age=0; path=/';
-    setIsAdmin(false);
-    window.location.href = '/admin/login';
+    setIsAdmin(false); // Optimistic update
+    await logoutAdmin();
   }
 
   // Detect scroll to add shadow
@@ -593,6 +606,9 @@ export function Navigation() {
       setTrainingOpen(false);
     }, 120);
   };
+
+  // Skip rendering navigation entirely if on an admin route
+  if (pathname.startsWith("/admin")) return null;
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -719,44 +735,19 @@ export function Navigation() {
 
           {/* CTA group */}
           <div className="ml-4 pl-4 flex items-center gap-2">
-            {/* Admin button */}
-            {isAdmin ? (
-              <>
-                <Link
-                  href="/admin/blog"
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2",
-                    "text-sm font-semibold text-white/90",
-                    "transition-colors duration-150 hover:bg-white/20 hover:text-white"
-                  )}
-                >
-                  <ShieldCheck size={14} /> Admin
-                </Link>
-                <button
-                  onClick={handleAdminLogout}
-                  title="Logout"
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full border border-[#ce2124]/50 bg-[#ce2124]/15 px-4 py-2",
-                    "text-sm font-semibold text-white/80",
-                    "transition-colors duration-150 hover:bg-[#ce2124]/30 hover:text-white"
-                  )}
-                >
-                  <LogOut size={14} /> Logout
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/admin/login"
+            {isAdmin && (
+              <button
+                onClick={handleAdminLogout}
+                title="Logout"
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2",
+                  "inline-flex items-center gap-1.5 rounded-full border border-[#ce2124]/50 bg-[#ce2124]/15 px-4 py-2",
                   "text-sm font-semibold text-white/80",
-                  "transition-colors duration-150 hover:bg-white/20 hover:text-white"
+                  "transition-colors duration-150 hover:bg-[#ce2124]/30 hover:text-white"
                 )}
               >
-                <ShieldCheck size={14} /> Admin Login
-              </Link>
+                Logout
+              </button>
             )}
-
             <Link
               href="/contact"
               className={cn(
@@ -792,6 +783,8 @@ export function Navigation() {
         isOpen={mobileOpen}
         pathname={pathname}
         onClose={() => setMobileOpen(false)}
+        isAdmin={isAdmin}
+        onLogout={handleAdminLogout}
       />
     </header>
   );

@@ -6,6 +6,8 @@ import { BLOG_CATEGORIES, type BlogPost } from "@/lib/blog";
 import { getAllCmsPosts } from "@/lib/blog-cms";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { cn, formatDate } from "@/lib/utils";
+import { cookies } from "next/headers";
+import { Plus } from "lucide-react";
 import { BlogCategoryFilter } from "./BlogCategoryFilter";
 import { NewsletterForm } from "./NewsletterForm";
 
@@ -316,6 +318,9 @@ function NewsletterCTA() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function BlogPage() {
+  const cookieStore = cookies();
+  const isAdmin = cookieStore.get('admin_session')?.value === 'true';
+
   // Data fetching on the server from Supabase
   const allPosts = await getAllCmsPosts();
   const featuredPost = allPosts.find((p) => p.featured) ?? null;
@@ -324,6 +329,19 @@ export default async function BlogPage() {
 
   return (
     <>
+      {isAdmin && (
+        <Link
+          href="/admin/blog/new"
+          className="fixed bottom-8 right-8 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-xl shadow-accent/20 transition-all hover:scale-110 hover:bg-accent-light active:scale-95 group"
+          title="Create New Post"
+        >
+          <Plus size={24} strokeWidth={2.5} />
+          <span className="absolute right-full mr-3 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100">
+            Create New Post
+          </span>
+        </Link>
+      )}
+
       <Hero />
 
       {/* Featured post */}
