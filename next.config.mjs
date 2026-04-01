@@ -3,7 +3,20 @@
 const nextConfig = {
   images: {
     formats: ["image/webp"],
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "mlgengtzqglimrtjqwcs.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.openai.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
   experimental: {
     mdxRs: true,
