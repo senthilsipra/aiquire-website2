@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import * as LucideIcons from "lucide-react";
+import type { LucideProps } from "lucide-react";
+import type { ForwardRefExoticComponent, RefAttributes } from "react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CTABanner } from "@/components/ui/CTABanner";
@@ -13,6 +16,26 @@ export const metadata: Metadata = {
   description:
     "Pre-built, battle-tested automation packages. Deploy in days, not months. Predictable pricing, immediate results, maintenance included.",
 };
+
+// ─── Icon resolver ────────────────────────────────────────────────────────────
+// Note: This remains a server-side component. Lucide icons are rendered as SVGs.
+
+type LucideIconComponent = ForwardRefExoticComponent<
+  LucideProps & RefAttributes<SVGSVGElement>
+>;
+
+function ServiceIcon({ name, className }: { name: string; className?: string }) {
+  const icons = LucideIcons as unknown as Record<string, LucideIconComponent>;
+  const Icon = icons[name] ?? icons["HelpCircle"];
+
+  return (
+    <Icon
+      className={cn("h-10 w-10 text-accent", className)}
+      strokeWidth={1.75}
+      aria-hidden="true"
+    />
+  );
+}
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
 
@@ -224,6 +247,16 @@ export default function PackagedSolutionsPage() {
           )}
         >
           <Breadcrumb />
+          
+          {/* Icon badge */}
+          <div
+            className={cn(
+              "mb-6 inline-flex h-16 w-16 items-center justify-center",
+              "rounded-2xl border border-accent/30 bg-accent/10"
+            )}
+          >
+            <ServiceIcon name="Package" className="h-8 w-8 text-accent-light" />
+          </div>
 
           {/* Overline pill */}
           <p

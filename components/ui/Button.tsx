@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "hero" | "outline-white";
 export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonProps
@@ -39,6 +39,15 @@ const variantClasses: Record<ButtonVariant, string> = {
     "active:bg-accent/10",
     "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
     "disabled:text-accent/40 disabled:cursor-not-allowed",
+  ].join(" "),
+  hero: [
+    "bg-primary text-white font-semibold border-none shadow-lg hover:shadow-xl",
+    "hover:bg-primary/90 hover:-translate-y-0.5",
+    "transition-all duration-300",
+  ].join(" "),
+  "outline-white": [
+    "border-2 border-white/60 text-white bg-transparent",
+    "hover:bg-white/10 transition-all duration-300",
   ].join(" "),
 };
 

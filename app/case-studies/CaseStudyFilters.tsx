@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Filter } from "lucide-react";
 import type { CaseStudy } from "@/lib/case-studies";
 import { cn } from "@/lib/utils";
 
@@ -10,186 +11,150 @@ import { cn } from "@/lib/utils";
 
 interface CaseStudyFiltersProps {
   caseStudies: CaseStudy[];
-  industries: string[];
 }
 
-// ─── Filter pill component ────────────────────────────────────────────────────
+// ─── Dropdown Component ───────────────────────────────────────────────────────
 
-function FilterPill({
+function FilterSelect({
   label,
-  isActive,
-  count,
-  onClick,
+  value,
+  options,
+  onChange,
 }: {
   label: string;
-  isActive: boolean;
-  count: number;
-  onClick: () => void;
+  value: string;
+  options: string[];
+  onChange: (val: string) => void;
 }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <button
-      onClick={onClick}
-      aria-pressed={isActive}
-      className={cn(
-        "relative inline-flex items-center gap-1.5 rounded-full px-4 py-2",
-        "font-body text-sm font-medium",
-        "border transition-all duration-200",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-        isActive
-          ? "border-accent bg-accent text-white shadow-sm"
-          : "border-border bg-white text-textSecondary hover:border-accent/50 hover:text-accent hover:bg-bgBlue"
-      )}
-    >
-      {label}
-      <span
-        className={cn(
-          "inline-flex items-center justify-center rounded-full text-[10px] font-semibold",
-          "h-4 min-w-[1rem] px-1",
-          isActive
-            ? "bg-white/25 text-white"
-            : "bg-bgLight text-textSecondary"
-        )}
-        aria-label={`${count} case studies`}
-      >
-        {count}
-      </span>
-    </button>
+    <div className="flex flex-col gap-2 flex-1 min-w-[200px]" ref={containerRef}>
+      <label className="text-sm font-semibold text-textPrimary px-1">
+        {label}
+      </label>
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={cn(
+            "flex w-full items-center justify-between rounded-xl border border-border bg-white p-4 text-sm transition-all text-textPrimary h-[54px]",
+            isOpen ? "border-accent ring-1 ring-accent" : "hover:border-accent/50"
+          )}
+        >
+          <span className="truncate">{value}</span>
+          <ChevronDown
+            className={cn("h-4 w-4 text-textSecondary transition-transform", isOpen && "rotate-180")}
+          />
+        </button>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
+              className="absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-border bg-white shadow-xl"
+            >
+              <div className="max-h-60 overflow-y-auto py-1">
+                {options.map((opt) => (
+                  <button
+                    key={opt}
+                    onClick={() => {
+                      onChange(opt);
+                      setIsOpen(false);
+                    }}
+                    className={cn(
+                      "flex w-full px-4 py-3 text-left text-sm transition-colors",
+                      value === opt
+                        ? "bg-textSecondary text-white"
+                        : "text-textPrimary hover:bg-bgBlue"
+                    )}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   );
 }
 
-// ─── Card component (defined here to avoid re-importing RevealOnScroll
-//     from the server page — this is the client-side card grid) ──────────────
+// ─── Card component ───────────────────────────────────────────────────────────
 
 function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      whileHover={{ y: -4 }}
       className={cn(
-        "group relative flex flex-col h-full",
-        "rounded-2xl border border-border bg-white",
-        "shadow-sm hover:shadow-lg transition-shadow duration-300",
-        "overflow-hidden"
+        "group relative flex flex-col h-full bg-gradient-card rounded-2xl p-7 border border-border shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
       )}
-      style={{ borderLeftColor: study.accentColor, borderLeftWidth: "4px" }}
-      aria-labelledby={`filter-card-title-${study.slug}`}
+      style={{ borderTop: `4px solid ${study.accentColor}` }}
     >
-      <div className="flex flex-col h-full p-6 md:p-8">
-        {/* Industry badge */}
-        <div className="mb-5">
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest border"
-            style={{
-              color: study.accentColor,
-              borderColor: study.accentColor,
-              backgroundColor: `${study.accentColor}14`,
-            }}
-          >
-            {study.industry}
-          </span>
-        </div>
+      <div className="flex flex-col h-full">
+        {/* Main Content Area */}
+        <div className="flex-grow">
+          {/* Badges */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            <span className="inline-flex items-center rounded-full bg-primary/5 border border-primary/10 px-2.5 py-0.5 text-[9px] font-bold text-primary uppercase tracking-[0.08em]">
+              {study.industry}
+            </span>
+            <span className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-2.5 py-0.5 text-[9px] font-bold text-accent uppercase tracking-[0.08em]">
+              {study.category}
+            </span>
+          </div>
 
-        {/* Title */}
-        <h3
-          id={`filter-card-title-${study.slug}`}
-          className="mb-5 font-heading font-bold text-primary text-xl md:text-2xl leading-snug tracking-tight"
-        >
-          {study.title}
-        </h3>
+          <h3 className="text-lg md:text-xl font-heading font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300 leading-snug">
+            {study.title}
+          </h3>
 
-        {/* Challenge */}
-        <div className="mb-4">
-          <p className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-textSecondary">
-            The Challenge
-          </p>
-          <p className="font-body text-sm leading-relaxed text-textSecondary">
+          <p className="text-textSecondary text-sm mb-6 line-clamp-3 font-body leading-relaxed opacity-80">
             {study.challenge}
           </p>
         </div>
 
-        {/* Solution */}
-        <div className="mb-6">
-          <p className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-textSecondary">
-            Our Solution
-          </p>
-          <p className="font-body text-sm leading-relaxed text-textSecondary">
-            {study.solution}
-          </p>
-        </div>
-
-        {/* Results */}
-        <div className="mb-6">
-          <p className="mb-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-textSecondary">
-            Results
-          </p>
-          <ul className="space-y-2" aria-label="Project results">
-            {study.results.map((result) => (
-              <li
-                key={result}
-                className="flex items-start gap-2.5 font-body text-sm text-textPrimary"
+        {/* Bottom Actions Area */}
+        <div className="mt-6 flex flex-col">
+          {/* Tech Tags */}
+          <div className="flex flex-wrap gap-2 pt-5 border-t border-border/50 mb-6">
+            {study.techTags.slice(0, 3).map((tag, idx) => (
+              <span 
+                key={idx}
+                className="px-2 py-0.5 rounded-md bg-bgLight border border-border text-[9px] font-semibold text-textSecondary/60 uppercase"
               >
-                <span
-                  className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-success/15 text-success"
-                  aria-hidden="true"
-                >
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path
-                      d="M2 5.5L4 7.5L8 3"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                {result}
-              </li>
+                {tag}
+              </span>
             ))}
-          </ul>
-        </div>
-
-        {/* Ongoing Visibility */}
-        {study.ongoingVisibility && (
-          <div className="mb-4">
-            <p className="mb-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-textSecondary">
-              Ongoing Visibility
-            </p>
-            <p className="font-body text-sm leading-relaxed text-textPrimary">
-              {study.ongoingVisibility}
-            </p>
+            {study.techTags.length > 3 && (
+              <span className="text-[9px] font-semibold text-textSecondary/40 self-center">
+                +{study.techTags.length - 3}
+              </span>
+            )}
           </div>
-        )}
 
-        {/* Tech tags */}
-        <div className="mb-6 flex flex-wrap gap-2" aria-label="Technologies used">
-          {study.techTags.map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex items-center rounded-md px-2.5 py-1 border border-accent/30 bg-bgBlue font-mono text-[10px] font-medium text-accent tracking-wide"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA — pushed to bottom */}
-        <div className="mt-auto pt-4 border-t border-border">
           <Link
             href={`/case-studies/${study.slug}`}
-            className="group/link inline-flex items-center gap-1.5 font-body text-sm font-semibold transition-all duration-200"
-            style={{ color: study.accentColor }}
-            aria-label={`Read full case study: ${study.title}`}
+            className="inline-flex items-center gap-2 font-bold transition-colors text-sm text-primary hover:text-accent w-fit group/btn"
           >
             Read Full Case Study
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-200 group-hover/link:translate-x-1"
-            >
-              →
-            </span>
+            <span className="text-lg transition-transform group-hover/btn:translate-x-1 duration-300">→</span>
           </Link>
         </div>
       </div>
@@ -197,128 +162,89 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
   );
 }
 
-// ─── Empty state ──────────────────────────────────────────────────────────────
-
-function EmptyState({ industry }: { industry: string }) {
-  return (
-    <div className="col-span-full flex flex-col items-center justify-center py-20 text-center">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-bgBlue">
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 28 28"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M14 4C8.477 4 4 8.477 4 14s4.477 10 10 10 10-4.477 10-10S19.523 4 14 4z"
-            stroke="#2980B9"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M14 10v4M14 18h.01"
-            stroke="#2980B9"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-      <p className="font-heading font-bold text-primary text-lg mb-2">
-        No case studies for {industry} yet
-      </p>
-      <p className="font-body text-sm text-textSecondary max-w-xs">
-        We&apos;re actively working in this space. Check back soon or{" "}
-        <Link href="/contact" className="text-accent underline underline-offset-2 hover:text-accent-dark">
-          get in touch
-        </Link>{" "}
-        to discuss your specific needs.
-      </p>
-    </div>
-  );
-}
-
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export function CaseStudyFilters({
   caseStudies,
-  industries,
 }: CaseStudyFiltersProps) {
-  const [selectedIndustry, setSelectedIndustry] = React.useState<string>("All");
+  const [useCase, setUseCase] = React.useState("All Use Cases");
+  const [industry, setIndustry] = React.useState("All Industries");
+  const [function_, setFunction] = React.useState("All Functions");
+  const [tech, setTech] = React.useState("All Technologies");
 
-  const filteredStudies = React.useMemo(
-    () =>
-      selectedIndustry === "All"
-        ? caseStudies
-        : caseStudies.filter((cs) => cs.industry === selectedIndustry),
-    [caseStudies, selectedIndustry]
-  );
+  const options = React.useMemo(() => ({
+    useCases: ["All Use Cases", ...Array.from(new Set(caseStudies.map((s) => s.category)))],
+    industries: ["All Industries", ...Array.from(new Set(caseStudies.map((s) => s.industry)))],
+    functions: ["All Functions", ...Array.from(new Set(caseStudies.map((s) => s.businessFunction)))],
+    tech: ["All Technologies", ...Array.from(new Set(caseStudies.flatMap((s) => s.techTags)))],
+  }), [caseStudies]);
 
-  const countForIndustry = React.useCallback(
-    (industry: string) =>
-      industry === "All"
-        ? caseStudies.length
-        : caseStudies.filter((cs) => cs.industry === industry).length,
-    [caseStudies]
-  );
+  const filteredStudies = caseStudies.filter((cs) => {
+    const matchUseCase = useCase === "All Use Cases" || cs.category === useCase;
+    const matchIndustry = industry === "All Industries" || cs.industry === industry;
+    const matchFunction = function_ === "All Functions" || cs.businessFunction === function_;
+    const matchTech = tech === "All Technologies" || cs.techTags.includes(tech);
+    return matchUseCase && matchIndustry && matchFunction && matchTech;
+  });
 
   return (
-    <>
-      {/* Filter bar */}
-      <div
-        className="mt-10 flex flex-wrap items-center gap-2"
-        role="group"
-        aria-label="Filter case studies by industry"
-      >
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-textSecondary mr-2">
-          Filter by:
-        </span>
-        {industries.map((industry) => (
-          <FilterPill
-            key={industry}
-            label={industry}
-            isActive={selectedIndustry === industry}
-            count={countForIndustry(industry)}
-            onClick={() => setSelectedIndustry(industry)}
-          />
-        ))}
+    <div className="space-y-12">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <Filter className="h-6 w-6 text-textSecondary" />
+        <h2 className="text-3xl font-heading font-bold text-primary">Filter Case Studies</h2>
+      </div>
+
+      {/* Filters Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <FilterSelect
+          label="Use Case Category"
+          value={useCase}
+          options={options.useCases}
+          onChange={setUseCase}
+        />
+        <FilterSelect
+          label="Industry"
+          value={industry}
+          options={options.industries}
+          onChange={setIndustry}
+        />
+        <FilterSelect
+          label="Business Function"
+          value={function_}
+          options={options.functions}
+          onChange={setFunction}
+        />
+        <FilterSelect
+          label="AI Technology Used"
+          value={tech}
+          options={options.tech}
+          onChange={setTech}
+        />
       </div>
 
       {/* Result count */}
-      <div className="mt-6 mb-8" aria-live="polite" aria-atomic="true">
-        <p className="font-body text-sm text-textSecondary">
-          Showing{" "}
-          <span className="font-semibold text-textPrimary">
-            {filteredStudies.length}
-          </span>{" "}
-          {filteredStudies.length === 1 ? "case study" : "case studies"}
-          {selectedIndustry !== "All" && (
-            <span>
-              {" "}
-              in{" "}
-              <span className="font-semibold text-textPrimary">
-                {selectedIndustry}
-              </span>
-            </span>
-          )}
+      <div className="pt-4">
+        <p className="text-lg font-medium text-textSecondary capitalize">
+          {filteredStudies.length === caseStudies.length ? "All case studies" : `${filteredStudies.length} case studies found`}
         </p>
       </div>
 
-      {/* Cards grid with animated presence */}
-      <motion.div
-        layout
-        className="grid grid-cols-1 gap-6 lg:grid-cols-2"
-        aria-label="Case studies"
-      >
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <AnimatePresence mode="popLayout">
-          {filteredStudies.length === 0 ? (
-            <EmptyState industry={selectedIndustry} />
-          ) : (
+          {filteredStudies.length > 0 ? (
             filteredStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} />
             ))
+          ) : (
+            <div className="col-span-full py-20 text-center bg-white rounded-3xl border border-dashed border-border">
+              <p className="text-xl font-heading font-semibold text-primary mb-2">No matching case studies</p>
+              <p className="text-textSecondary">Try adjusting your filters to find what you&apos;re looking for.</p>
+            </div>
           )}
         </AnimatePresence>
-      </motion.div>
-    </>
+      </div>
+    </div>
   );
 }

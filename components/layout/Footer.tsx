@@ -181,10 +181,16 @@ function NewsletterForm() {
   );
 }
 
+import { usePathname } from "next/navigation";
+
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
 export function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  // Skip rendering footer entirely if on an admin route
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <footer className="bg-[#0F2B46]" aria-label="Site footer">

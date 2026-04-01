@@ -1,0 +1,42 @@
+(node:40768) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ⨯ ./app/case-studies/[slug]/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\hemat\Downloads\aiquire-website2\aiquire-website2\app\case-studies\[slug]\page.tsx[0m:41:1]
+ [2m41[0m |       : [];
+ [2m42[0m | 
+ [2m43[0m |   return (
+ [2m44[0m |     <div className="bg-bgLight min-h-screen">
+    : [31;1m     ^^^[0m
+ [2m45[0m |       {/* Hero Section */}
+ [2m46[0m |       <section className="relative overflow-hidden bg-primary pt-32 pb-20 md:pt-44 md:pb-32">
+ [2m47[0m |         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/case-studies/[slug]/page.tsx
+ ⨯ ./app/case-studies/[slug]/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+    ,-[[36;1;4mC:\Users\hemat\Downloads\aiquire-website2\aiquire-website2\app\case-studies\[slug]\page.tsx[0m:41:1]
+ [2m41[0m |       : [];
+ [2m42[0m | 
+ [2m43[0m |   return (
+ [2m44[0m |     <div className="bg-bgLight min-h-screen">
+    : [31;1m     ^^^[0m
+ [2m45[0m |       {/* Hero Section */}
+ [2m46[0m |       <section className="relative overflow-hidden bg-primary pt-32 pb-20 md:pt-44 md:pb-32">
+ [2m47[0m |         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/case-studies/[slug]/page.tsx
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+^C

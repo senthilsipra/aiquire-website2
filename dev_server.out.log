@@ -1,0 +1,175 @@
+
+> aiquire-website@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ✓ Compiled /middleware in 401ms (72 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 11.4s (1370 modules)
+ ✓ Compiled in 1186ms (680 modules)
+ HEAD / 200 in 172ms
+ GET / 200 in 130ms
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 620ms (725 modules)
+ GET /api/admin-session 200 in 844ms
+ GET /api/admin-session 200 in 35ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 1057ms (1401 modules)
+ GET /api/admin-session 200 in 38ms
+ ○ Compiling /case-studies ...
+ ✓ Compiled /case-studies in 722ms (1413 modules)
+ GET /api/admin-session 200 in 46ms
+ ○ Compiling /case-studies/[slug] ...
+ ✓ Compiled /case-studies/[slug] in 645ms (1427 modules)
+ GET /api/admin-session 200 in 35ms
+ ✓ Compiled in 1079ms (1371 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 256ms
+ ○ Compiling /_error ...
+ GET /case-studies/digital-assistant-clinic 500 in 53ms
+ ✓ Compiled /_not-found in 1408ms (1594 modules)
+ GET /_next/static/webpack/8a446ef33991fdc4.webpack.hot-update.json 404 in 1936ms
+ GET /case-studies/digital-assistant-clinic 200 in 430ms
+ GET /case-studies/digital-assistant-clinic 200 in 125ms
+ ✓ Compiled /api/admin-session in 244ms (762 modules)
+ GET /api/admin-session 200 in 340ms
+ GET /api/admin-session 200 in 16ms
+ GET /case-studies/digital-assistant-clinic 200 in 327ms
+ ✓ Compiled in 285ms (726 modules)
+ GET /case-studies/[object%20Object] 404 in 253ms
+ ✓ Compiled in 1265ms (1605 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 216ms
+ ✓ Compiled /api/admin-session in 274ms (761 modules)
+ GET /api/admin-session 200 in 376ms
+ GET /api/admin-session 200 in 22ms
+ ✓ Compiled in 390ms (726 modules)
+ GET /case-studies/ai-service-desk-copilot 200 in 277ms
+ ✓ Compiled /api/admin-session in 182ms (761 modules)
+ GET /api/admin-session 200 in 295ms
+ GET /api/admin-session 200 in 17ms
+ ✓ Compiled in 1118ms (1605 modules)
+ GET /case-studies/editorial-management-platform 200 in 201ms
+ ✓ Compiled in 399ms (726 modules)
+ GET /case-studies/editorial-management-platform 200 in 189ms
+ ✓ Compiled /api/admin-session in 288ms (761 modules)
+ GET /api/admin-session 200 in 430ms
+ GET /api/admin-session 200 in 32ms
+ GET /api/admin-session 200 in 23ms
+ GET /api/admin-session 200 in 16ms
+ GET /api/admin-session 200 in 26ms
+ GET /api/admin-session 200 in 20ms
+ GET /api/admin-session 200 in 38ms
+ GET /api/admin-session 200 in 20ms
+ ✓ Compiled in 1135ms (1605 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 334ms
+ ✓ Compiled /api/admin-session in 201ms (761 modules)
+ GET /api/admin-session 200 in 327ms
+ GET /api/admin-session 200 in 22ms
+ GET /api/admin-session 200 in 17ms
+ GET /api/admin-session 200 in 28ms
+ GET /api/admin-session 200 in 34ms
+ GET /api/admin-session 200 in 24ms
+ GET /api/admin-session 200 in 34ms
+ GET /api/admin-session 200 in 28ms
+ ✓ Compiled in 1078ms (1605 modules)
+ ✓ Compiled in 664ms (1605 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 162ms
+ ✓ Compiled in 1136ms (1605 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 236ms
+ ✓ Compiled in 1114ms (1605 modules)
+ GET /case-studies/ai-service-desk-copilot 200 in 163ms
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 574ms (761 modules)
+ GET /api/admin-session 200 in 686ms
+ GET /api/admin-session 200 in 31ms
+ ✓ Compiled in 1031ms (1640 modules)
+ GET /case-studies/digital-assistant-clinic 200 in 274ms
+ GET /api/admin-session 200 in 59ms
+ ○ Compiling /approach ...
+ ✓ Compiled /approach in 1453ms (1614 modules)
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 1051ms (1649 modules)
+ GET /api/admin-session 200 in 1174ms
+ ○ Compiling /industries ...
+ ✓ Compiled /industries in 8.2s (3098 modules)
+ GET /case-studies 200 in 1112ms
+ GET /api/admin-session 200 in 30ms
+ GET /api/admin-session 200 in 22ms
+ GET /api/admin-session 200 in 35ms
+ GET /api/admin-session 200 in 23ms
+ GET /api/admin-session 200 in 28ms
+ GET /api/admin-session 200 in 18ms
+ GET /api/admin-session 200 in 32ms
+ GET /api/admin-session 200 in 32ms
+ GET /api/admin-session 200 in 57ms
+ GET /api/admin-session 200 in 42ms
+ GET /api/admin-session 200 in 46ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 3.8s (2234 modules)
+ GET /api/admin-session 200 in 114ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1698ms (2258 modules)
+ GET /api/admin-session 200 in 68ms
+ ○ Compiling /approach ...
+ ✓ Compiled /approach in 4.4s (735 modules)
+ ✓ Compiled /api/admin-session in 326ms (770 modules)
+ GET /api/admin-session 200 in 540ms
+ ✓ Compiled in 9.7s (1651 modules)
+ GET /approach 200 in 540ms
+ ○ Compiling / ...
+ ✓ Compiled / in 3.4s (762 modules)
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 648ms (797 modules)
+ GET /api/admin-session 200 in 847ms
+ ✓ Compiled in 3s (1672 modules)
+ ○ Compiling /approach ...
+ ✓ Compiled /approach in 4.2s (797 modules)
+ GET /approach 200 in 5024ms
+ GET / 200 in 2055ms
+ GET /api/admin-session 200 in 46ms
+ GET /api/admin-session 200 in 41ms
+ GET /api/admin-session 200 in 34ms
+ ✓ Compiled in 3.8s (1678 modules)
+ GET /approach 200 in 583ms
+ ✓ Compiled in 11.7s (1643 modules)
+ GET /approach 200 in 1135ms
+ GET /approach 200 in 344ms
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 532ms (797 modules)
+ GET /api/admin-session 200 in 666ms
+ GET /api/admin-session 200 in 1037ms
+ GET /approach 200 in 559ms
+ GET /api/admin-session 200 in 67ms
+ GET /api/admin-session 200 in 61ms
+ ✓ Compiled in 4.3s (1678 modules)
+ GET /approach 200 in 353ms
+ ○ Compiling /industries ...
+ ✓ Compiled /industries in 6.2s (2258 modules)
+ GET /api/admin-session 200 in 3197ms
+ GET /api/admin-session 200 in 263ms
+ GET /api/admin-session 200 in 45ms
+ GET /api/admin-session 200 in 30ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 885ms (2261 modules)
+ GET /api/admin-session 200 in 36ms
+ ○ Compiling /blog ...
+ ✓ Compiled /blog in 11s (3251 modules)
+ GET /api/admin-session 200 in 201ms
+ GET /api/admin-session 200 in 39ms
+ ✓ Compiled in 14.4s (3101 modules)
+ GET / 200 in 355ms
+ GET / 200 in 9074ms
+ ○ Compiling /api/admin-session ...
+ ✓ Compiled /api/admin-session in 1405ms (2252 modules)
+ GET /api/admin-session 200 in 1619ms
+ GET /api/admin-session 200 in 158ms
+ GET /api/admin-session 200 in 40ms
+ GET /api/admin-session 200 in 35ms
+ GET /api/admin-session 200 in 33ms
+ ○ Compiling /case-studies/[slug] ...
+ ✓ Compiled /case-studies/[slug] in 2000ms (2261 modules)
+ GET /api/admin-session 200 in 112ms

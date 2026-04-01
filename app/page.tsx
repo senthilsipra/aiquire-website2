@@ -368,11 +368,10 @@ export default function HomePage() {
         {/* Phase cards below diagram */}
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {DIAMOND_PHASES.map((phase, i) => (
-            <RevealOnScroll key={phase.phase} delay={i * 100}>
+            <RevealOnScroll key={phase.phase} delay={i * 100} className="h-full">
               <div
                 className={cn(
-                  "rounded-2xl border border-border bg-white",
-                  "p-6",
+                  "flex h-full min-h-[340px] flex-col rounded-2xl border border-border bg-white p-6",
                   "shadow-sm"
                 )}
               >

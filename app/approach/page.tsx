@@ -147,10 +147,10 @@ function DoubleDiamondSection() {
       {/* Phase cards below the diagram */}
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {DIAMOND_PHASES.map((phase, i) => (
-          <RevealOnScroll key={phase.phase} delay={i * 80}>
+          <RevealOnScroll key={phase.phase} delay={i * 80} className="h-full">
             <div
               className={cn(
-                "rounded-2xl border border-border bg-white p-6",
+                "h-full min-h-[320px] rounded-2xl border border-border bg-white p-6",
                 "flex flex-col gap-4",
                 "shadow-sm hover:shadow-md transition-all duration-200",
                 "hover:border-accent/40 hover:-translate-y-0.5"
@@ -214,10 +214,10 @@ function Differentiators() {
 
       <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {DIFFERENTIATORS.map((item, i) => (
-          <RevealOnScroll key={item.title} delay={i * 100}>
+          <RevealOnScroll key={item.title} delay={i * 100} className="h-full">
             <div
               className={cn(
-                "relative rounded-2xl border border-border bg-bgLight p-8",
+                "relative h-full min-h-[360px] rounded-2xl border border-border bg-bgLight p-7",
                 "flex flex-col gap-5",
                 "hover:border-accent/30 hover:bg-bgBlue/20",
                 "transition-all duration-200",
@@ -267,11 +267,11 @@ function CaseStudyPreviews() {
 
       <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
         {CASE_STUDY_PREVIEWS.map((preview, i) => (
-          <RevealOnScroll key={i} delay={i * 100}>
+          <RevealOnScroll key={i} delay={i * 100} className="h-full">
             <Link
               href={preview.href}
               className={cn(
-                "group flex flex-col gap-5 rounded-2xl border border-border bg-white p-8",
+                "group flex h-full min-h-[280px] flex-col gap-5 rounded-2xl border border-border bg-white p-7",
                 "shadow-sm hover:shadow-lg",
                 "hover:border-accent/40",
                 "transition-all duration-300",
